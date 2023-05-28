@@ -1,0 +1,27 @@
+﻿@page "/game"
+@using TDD_Squirrel.Components
+<h3>Schlange-Leiter-Spiel</h3>
+
+<h4>Aufgabe 1</h4>
+<div>
+    <ul>
+        <li>Anzahl Spielfelder: @NumberOfFields</li>
+        <li>Spielfigur rückt um die gewürfelte Anzahl Felder vor</li>
+        <li>Ist das Ziel erreicht, ist ein Würfeln nicht mehr möglich</li>
+    </ul>
+</div>
+<h5>Spielbrett</h5>
+<div>
+    @for (var i = 0; i < NumberOfFields; i++)
+    {
+        var i1 = i;
+        <Field>
+            @if (i1 == 0)
+            {
+                <div class="field-content">
+                    <GameFigure></GameFigure>
+                </div>
+            }
+        </Field>
+    }
+</div>
