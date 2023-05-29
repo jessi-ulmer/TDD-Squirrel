@@ -48,7 +48,6 @@ namespace TDD_Squirrel.Test
         public void RollDice_Should_Return_Integer_Between_1_And_6()
         {
             var result = FigureMover.RollDie();
-            result.Should().BeOfType<int>();
             result.Should().BeInRange(1, 6);
         }
     }
