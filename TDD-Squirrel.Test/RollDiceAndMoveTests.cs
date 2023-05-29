@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using TDD_Squirrel;
 
 namespace TDD_Squirrel.Test
 {
