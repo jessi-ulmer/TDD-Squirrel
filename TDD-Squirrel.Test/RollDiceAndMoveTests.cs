@@ -53,6 +53,8 @@ namespace TDD_Squirrel.Test
 
         [TestCase(0, 1, 1)]
         [TestCase(1, 1, 2)]
+        [TestCase(5, 5, 10)]
+        [TestCase(5, 6, 10)]
         public void CalculatePosition_Should_Return_NewPosition(int previousPosition, int diceRoll, int expected)
         {
             var result = FigureMover.CalculatePosition(0, 1);
