@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentAssertions.Execution;
-using TDD_Squirrel;
 
 namespace TDD_Squirrel.Test
 {
@@ -47,7 +41,7 @@ namespace TDD_Squirrel.Test
         [Test]
         public void RollDice_Should_Return_Integer_Between_1_And_6()
         {
-            var result = FigureMover.RollDie();
+            var result = PieceMover.RollDie();
             result.Should().BeInRange(1, 6);
         }
 
@@ -57,7 +51,7 @@ namespace TDD_Squirrel.Test
         [TestCase(5, 6, 10)]
         public void CalculatePosition_Should_Return_NewPosition(int previousPosition, int diceRoll, int expected)
         {
-            var result = FigureMover.CalculatePosition(previousPosition, diceRoll);
+            var result = PieceMover.CalculatePosition(previousPosition, diceRoll);
             result.Should().Be(expected);
         }
 
@@ -71,7 +65,7 @@ namespace TDD_Squirrel.Test
             using var assertionScope = new AssertionScope();
             for (var i = 0; i < 100; i++)
             {
-                var result = FigureMover.Move(previousPosition);
+                var result = PieceMover.Move(previousPosition);
                 result.Should().BeInRange(expectedRangeMin, expectedRangeMax);
             }
         }
