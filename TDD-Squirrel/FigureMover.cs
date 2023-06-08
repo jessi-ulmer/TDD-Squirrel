@@ -10,9 +10,9 @@
     }
 
 
-    public static int CalculatePosition(int i, int i1)
+    public static int CalculatePosition(int i, int il)
     {
-        return 1;
+        return i + il;
     }
 }
 
