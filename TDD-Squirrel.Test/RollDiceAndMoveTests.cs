@@ -63,10 +63,17 @@ namespace TDD_Squirrel.Test
 
 
         [TestCase(0, 1, 6)]
+        [TestCase(1, 2, 7)]
+        [TestCase(9, 10, 10)]
+        [TestCase(10, 10, 10)]
         public void Move_Should_Return_PositionInRange(int previousPosition, int expectedRangeMin, int expectedRangeMax)
         {
-            var result = FigureMover.Move(previousPosition);
-            result.Should().BeInRange(expectedRangeMin, expectedRangeMax);
+            using var assertionScope = new AssertionScope();
+            for (var i = 0; i < 100; i++)
+            {
+                var result = FigureMover.Move(previousPosition);
+                result.Should().BeInRange(expectedRangeMin, expectedRangeMax);
+            }
         }
 
     }
