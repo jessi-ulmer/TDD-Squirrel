@@ -70,11 +70,11 @@ namespace TDD_Squirrel.Test
             }
         }
 
-        [Test]
-        public void Move_Should_Return_DieStatus()
+        [TestCase(9, true)]
+        public void Move_Should_Return_DieStatus(int position, bool expected)
         {
-            var result = PieceMover.Move(9);
-            result.FinalSquareReached.Should().BeTrue();
+            var result = PieceMover.Move(position);
+            result.IsFinalSquareReached.Should().Be(expected);
         }
 
     }
