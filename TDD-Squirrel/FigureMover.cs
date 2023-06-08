@@ -12,6 +12,8 @@
 
     public static int CalculatePosition(int previousPosition, int dieResult)
     {
-        return previousPosition + dieResult;
+        var nextPosition = previousPosition + dieResult;
+        return Math.Min(nextPosition, 10);
+    }
     }
 }
