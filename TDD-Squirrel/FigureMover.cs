@@ -15,5 +15,11 @@
         var nextPosition = previousPosition + dieResult;
         return Math.Min(nextPosition, 10);
     }
+
+    public static int Move(int previousPosition)
+    {
+        var dieRoll = RollDie();
+        var newPosition = CalculatePosition(previousPosition, dieRoll);
+        return newPosition;
     }
 }
