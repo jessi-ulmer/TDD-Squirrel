@@ -2,11 +2,11 @@
 
     public class PieceMover
 {
-    public static int Move(int previousPosition)
+    public static MovingResult Move(int previousPosition)
     {
         var dieRoll = RollDie();
         var newPosition = CalculatePosition(previousPosition, dieRoll);
-        return newPosition;
+        return new MovingResult(newPosition, true);
     }
 
     public static int RollDie()
@@ -20,4 +20,6 @@
         var nextPosition = previousPosition + dieResult;
         return Math.Min(nextPosition, 10);
     }
+
+    public record MovingResult(int Position, bool FinalSquareReached) { }
 }

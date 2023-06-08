@@ -66,7 +66,7 @@ namespace TDD_Squirrel.Test
             for (var i = 0; i < 100; i++)
             {
                 var result = PieceMover.Move(previousPosition);
-                result.Should().BeInRange(expectedRangeMin, expectedRangeMax);
+                result.Position.Should().BeInRange(expectedRangeMin, expectedRangeMax);
             }
         }
 

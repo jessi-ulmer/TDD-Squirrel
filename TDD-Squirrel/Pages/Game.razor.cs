@@ -8,7 +8,7 @@
 
         private void MovePiece()
         {
-            PiecePosition = PieceMover.Move(PiecePosition);
+            PiecePosition = PieceMover.Move(PiecePosition).Position;
         }
     }
 }
