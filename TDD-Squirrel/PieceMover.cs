@@ -6,7 +6,8 @@
     {
         var dieRoll = RollDie();
         var newPosition = CalculatePosition(previousPosition, dieRoll);
-        return new MovingResult(newPosition, true);
+        var gameFinished = newPosition == 10;
+        return new MovingResult(newPosition, gameFinished);
     }
 
     public static int RollDie()
