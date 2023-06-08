@@ -51,18 +51,12 @@ namespace TDD_Squirrel.Test
             result.Should().BeInRange(1, 6);
         }
 
-        [Test]
-        public void CalculatePosition_Should_Return_NewPosition()
+        [TestCase(0, 1, 1)]
+        [TestCase(1, 1, 2)]
+        public void CalculatePosition_Should_Return_NewPosition(int previousPosition, int diceRoll, int expected)
         {
             var result = FigureMover.CalculatePosition(0, 1);
             result.Should().Be(1);
-        }
-
-        [Test]
-        public void CalculatePosition_Should_Return_NewPosition1()
-        {
-            var result = FigureMover.CalculatePosition(1, 1);
-            result.Should().Be(2);
         }
     }
 }
