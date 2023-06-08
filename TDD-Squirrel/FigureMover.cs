@@ -10,9 +10,8 @@
     }
 
 
-    public static int CalculatePosition(int i, int il)
+    public static int CalculatePosition(int previousPosition, int dieResult)
     {
-        return i + il;
+        return previousPosition + dieResult;
     }
 }
-
