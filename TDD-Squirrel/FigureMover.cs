@@ -8,5 +8,11 @@
         var result = generator.Next(1, 7);
         return result;
     }
+
+
+    public static int CalculatePosition(int i, int i1)
+    {
+        return 1;
+    }
 }
 
