@@ -71,6 +71,7 @@ namespace TDD_Squirrel.Test
         }
 
         [TestCase(9, true)]
+        [TestCase(0, false)]
         public void Move_Should_Return_DieStatus(int position, bool expected)
         {
             var result = PieceMover.Move(position);
