@@ -57,8 +57,8 @@ namespace TDD_Squirrel.Test
         [TestCase(5, 6, 10)]
         public void CalculatePosition_Should_Return_NewPosition(int previousPosition, int diceRoll, int expected)
         {
-            var result = FigureMover.CalculatePosition(0, 1);
-            result.Should().Be(1);
+            var result = FigureMover.CalculatePosition(previousPosition, diceRoll);
+            result.Should().Be(expected);
         }
     }
 }
