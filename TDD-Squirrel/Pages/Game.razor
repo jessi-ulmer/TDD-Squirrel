@@ -11,12 +11,15 @@
     </ul>
 </div>
 <h5>Spielbrett</h5>
+
+<button @onclick="MovePiece">Die</button>
+
 <div>
-    @for (var i = 0; i < NumberOfFields; i++)
+    @for (var i = 1; i < NumberOfFields +1; i++)
     {
         var i1 = i;
         <Field>
-            @if (i1 == 0)
+            @if (i1 == PiecePosition)
             {
                 <div class="field-content">
                     <GameFigure></GameFigure>
