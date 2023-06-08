@@ -57,5 +57,12 @@ namespace TDD_Squirrel.Test
             var result = FigureMover.CalculatePosition(0, 1);
             result.Should().Be(1);
         }
+
+        [Test]
+        public void CalculatePosition_Should_Return_NewPosition1()
+        {
+            var result = FigureMover.CalculatePosition(1, 1);
+            result.Should().Be(2);
+        }
     }
 }
