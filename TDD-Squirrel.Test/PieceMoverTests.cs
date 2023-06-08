@@ -70,5 +70,12 @@ namespace TDD_Squirrel.Test
             }
         }
 
+        [Test]
+        public void Move_Should_Return_DieStatus()
+        {
+            var result = PieceMover.Move(9);
+            result.FinalSquareReached.Should().BeTrue();
+        }
+
     }
 }
