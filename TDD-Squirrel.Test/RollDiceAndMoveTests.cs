@@ -50,5 +50,12 @@ namespace TDD_Squirrel.Test
             var result = FigureMover.RollDie();
             result.Should().BeInRange(1, 6);
         }
+
+        [Test]
+        public void CalculatePosition_Should_Return_NewPosition()
+        {
+            var result = FigureMover.CalculatePosition(0, 1);
+            result.Should().Be(1);
+        }
     }
 }
