@@ -60,5 +60,13 @@ namespace TDD_Squirrel.Test
             var result = FigureMover.CalculatePosition(previousPosition, diceRoll);
             result.Should().Be(expected);
         }
+
+
+        [Test]
+        public void Move_Should_Return_PositionInRange()
+        {
+            var result = FigureMover.Move(0);
+            result.Should().BeInRange(1, 6);
+        }
     }
 }
