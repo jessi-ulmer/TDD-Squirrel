@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using SnakesAndLaddersLib;
 
 namespace TDD_Squirrel.Test
 {

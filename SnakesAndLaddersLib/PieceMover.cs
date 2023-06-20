@@ -1,4 +1,4 @@
-﻿namespace TDD_Squirrel;
+﻿namespace SnakesAndLaddersLib;
 
     public class PieceMover
 {

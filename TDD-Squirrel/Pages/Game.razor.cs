@@ -1,4 +1,6 @@
-﻿namespace TDD_Squirrel.Pages
+﻿using SnakesAndLaddersLib;
+
+namespace TDD_Squirrel.Pages
 {
     public partial class Game
     {
@@ -8,7 +10,8 @@
 
         private void MovePiece()
         {
-            PiecePosition = PieceMover.Move(PiecePosition).Position;
+            var pm = new PieceMover();
+            PiecePosition = pm.Move(PiecePosition).Position;
         }
     }
 }
