@@ -1,6 +1,6 @@
 ﻿namespace SnakesAndLaddersLib;
 
-    public class PieceMover
+    public static class PieceMover
 {
     public static MovingResult Move(int previousPosition)
     {

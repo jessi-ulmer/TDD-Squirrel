@@ -10,8 +10,7 @@ namespace TDD_Squirrel.Pages
 
         private void MovePiece()
         {
-            var pm = new PieceMover();
-            PiecePosition = pm.Move(PiecePosition).Position;
+            PiecePosition = PieceMover.Move(PiecePosition).Position;
         }
     }
 }

@@ -2,7 +2,7 @@
 using FluentAssertions.Execution;
 using SnakesAndLaddersLib;
 
-namespace TDD_Squirrel.Test
+namespace SnakesAndLaddersLibTests
 {
     public class RollDiceAndMoveTests
     {
