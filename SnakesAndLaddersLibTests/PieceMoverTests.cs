@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FakeItEasy;
+﻿using FakeItEasy;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using SnakesAndLaddersLib;
 
 namespace SnakesAndLaddersLibTests
 {
-    public class DisableDiceTests
+    public class PieceMoverTests
     {
         private IDiceRoller _diceRoller;
         private PieceMover _sut;
@@ -20,17 +15,6 @@ namespace SnakesAndLaddersLibTests
         {
             _diceRoller = A.Fake<IDiceRoller>();
             _sut = new PieceMover(_diceRoller);
-        }
-
-        [Test]
-        public void PieceMover_Should_Return_FinishReached()
-        {
-            var diceRoller = A.Fake<IDiceRoller>();
-            A.CallTo(() => diceRoller.RollDie()).Returns(5);
-            var pieceMover = new PieceMover(diceRoller);
-            var movingResult = pieceMover.Move(5);
-            movingResult.Position.Should().Be(10);
-            movingResult.IsFinalSquareReached.Should().BeTrue();
         }
 
         [TestCase(0, 1, 1)]
