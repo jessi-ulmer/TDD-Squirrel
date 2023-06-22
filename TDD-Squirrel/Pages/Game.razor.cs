@@ -8,11 +8,16 @@ namespace TDD_Squirrel.Pages
 
         public int PiecePosition = 0;
 
+        public bool EnabledDie = true;
+
         private void MovePiece()
         {
             var diceRoller = new DiceRoller();
             var pieceMover = new PieceMover(diceRoller);
-            PiecePosition = pieceMover.Move(PiecePosition).Position;
+            var result =  pieceMover.Move(PiecePosition);
+            EnabledDie = result.IsFinalSquareReached is false;
+            PiecePosition = result.Position;
+
         }
     }
 }
