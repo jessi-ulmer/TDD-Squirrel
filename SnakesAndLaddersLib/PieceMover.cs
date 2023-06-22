@@ -1,23 +1,8 @@
 ﻿namespace SnakesAndLaddersLib;
 
-public interface IDiceRoller
-{
-    int RollDie();
-}
-
-public class DiceRoller : IDiceRoller
-{
-    public  int RollDie()
-    {
-        var generator = new Random();
-        var result = generator.Next(1, 7);
-        return result;
-    }
-}
-
 public class PieceMover
 {
-    private IDiceRoller _diceRoller;
+    private readonly IDiceRoller _diceRoller;
 
     public PieceMover(IDiceRoller diceRoller)
     {
