@@ -4,20 +4,26 @@ namespace TDD_Squirrel.Pages
 {
     public partial class Game
     {
+        private PieceMover pieceMover;
+        public Game()
+        {
+            var diceRoller = new DiceRoller();
+            pieceMover = new PieceMover(diceRoller);
+        }
         public int NumberOfFields = 10;
 
         public int PiecePosition = 0;
 
-        public bool EnabledDie = true;
+        public bool DisabledDie = false;
 
         private void MovePiece()
         {
-            var diceRoller = new DiceRoller();
-            var pieceMover = new PieceMover(diceRoller);
+
             var result =  pieceMover.Move(PiecePosition);
-            EnabledDie = result.IsFinalSquareReached is false;
+            DisabledDie = result.IsFinalSquareReached;
             PiecePosition = result.Position;
 
         }
     }
 }
+

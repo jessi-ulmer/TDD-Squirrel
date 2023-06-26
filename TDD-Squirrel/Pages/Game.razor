@@ -12,7 +12,7 @@
 </div>
 <h5>Spielbrett</h5>
 
-<button @onclick="MovePiece">Die</button>
+<button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
 
 <div>
     @for (var i = 1; i < NumberOfFields +1; i++)
