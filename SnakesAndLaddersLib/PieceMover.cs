@@ -17,7 +17,7 @@ public class PieceMover
         return new MovingResult(newPosition, gameFinished);
     }
 
-    public static int CalculatePosition(int previousPosition, int dieResult)
+    private static int CalculatePosition(int previousPosition, int dieResult)
     {
         var nextPosition = previousPosition + dieResult;
         return Math.Min(nextPosition, 10);
