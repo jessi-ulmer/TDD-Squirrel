@@ -23,5 +23,4 @@ public class PieceMover
         return Math.Min(nextPosition, 10);
     }
 
-    public record MovingResult(int Position, bool IsFinalSquareReached);
 }
