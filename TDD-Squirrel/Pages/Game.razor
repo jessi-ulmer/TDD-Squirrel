@@ -15,16 +15,22 @@
 <button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
 
 <div>
-    @for (var i = 1; i < NumberOfFields +1; i++)
+    @for(var rowIndex = 1; rowIndex < NumberOfRows + 1; rowIndex++)
     {
-        var i1 = i;
-        <Field>
-            @if (i1 == PiecePosition)
+        var localRowIndex = rowIndex;
+        <div>
+            @for (var fieldIndex = 1; fieldIndex < NumberOfFields + 1; fieldIndex++)
             {
-                <div class="field-content">
-                    <GameFigure></GameFigure>
-                </div>
+                var localFieldIndex = fieldIndex;
+                <Field>
+                    @if (localFieldIndex == PiecePosition && localRowIndex == 1)
+                    {
+                        <div class="field-content">
+                            <GameFigure></GameFigure>
+                        </div>
+                    }
+                </Field>
             }
-        </Field>
+        </div>
     }
 </div>
