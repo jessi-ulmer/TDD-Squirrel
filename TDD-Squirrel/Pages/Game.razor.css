@@ -5,3 +5,18 @@
 .field-content {
     display: table;
 }
+
+.button-diece {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.button-diece:disabled {
+    cursor: not-allowed;
+}
+
+.cube {
+    height: 40px;
+    width: 40px;
+}

@@ -4,7 +4,9 @@
 
 <h4>Spielbrett</h4>
 
-<button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
+<button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
+    <img src="images/cube.png" alt="game cube" class="cube"/>
+</button>
 
 <div>
     @for(var rowIndex = 1; rowIndex < NumberOfRows + 1; rowIndex++)
