@@ -9,22 +9,29 @@
         <li>Spielfigur rückt um die gewürfelte Anzahl Felder vor</li>
         <li>Ist das Ziel erreicht, ist ein Würfeln nicht mehr möglich</li>
     </ul>
-</div>
-<h5>Spielbrett</h5>
-
-<button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
-
+</div> 
+<button @onclick="StartNewGame"> Spiel starten</button>
 <div>
-    @for (var i = 1; i < NumberOfFields +1; i++)
+    @if (ShowGame)
     {
-        var i1 = i;
-        <Field>
-            @if (i1 == PiecePosition)
+        <h5>Spielbrett</h5>
+
+        <button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
+
+        <div>
+            @for (var i = 1; i < NumberOfFields + 1; i++)
             {
-                <div class="field-content">
-                    <GameFigure></GameFigure>
-                </div>
+                var i1 = i;
+                <Field>
+                    @if (i1 == PiecePosition)
+                    {
+                        <div class="field-content">
+                            <GameFigure></GameFigure>
+                        </div>
+                    }
+                </Field>
             }
-        </Field>
+        </div>
     }
+
 </div>

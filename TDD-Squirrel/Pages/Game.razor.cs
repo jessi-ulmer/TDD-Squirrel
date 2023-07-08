@@ -1,4 +1,5 @@
-﻿using SnakesAndLaddersLib;
+﻿using System.Runtime.InteropServices.JavaScript;
+using SnakesAndLaddersLib;
 
 namespace TDD_Squirrel.Pages
 {
@@ -15,14 +16,22 @@ namespace TDD_Squirrel.Pages
         public int PiecePosition = 0;
 
         public bool DisabledDie = false;
+        public bool ShowGame = false;
 
         private void MovePiece()
         {
-
             var result =  pieceMover.Move(PiecePosition);
             DisabledDie = result.IsFinalSquareReached;
             PiecePosition = result.Position;
+        }
 
+        private void StartNewGame()
+        {
+            var game = GameCreator.CreateGame();
+            DisabledDie = game.IsDieDisabled;
+            ShowGame = game.Status;
+            PiecePosition = game.Position;
+            NumberOfFields = game.NumberOfFields;
         }
     }
 }
