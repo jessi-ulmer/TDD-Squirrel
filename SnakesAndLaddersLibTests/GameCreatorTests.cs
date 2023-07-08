@@ -9,14 +9,16 @@ namespace SnakesAndLaddersLibTests;
 
 
         [Test]
-        public void CreateGame_Should_Return_NotNull()
+        public void CreateGame_Should_Return_InitializedGame()
         {
             var game = GameCreator.CreateGame();
+
+            using var scope = new AssertionScope();
             game.Should().NotBeNull();
-        //DisabledDie = game.IsDieDisabled;
-        //ShowGame = game.Status;
-        //PiecePosition = game.Position;
-        //NumberOfFields = game.NumberOfFields;
+            game.IsDieDisabled.Should().BeFalse();
+            game.Status.Should().BeTrue();
+            game.Position.Should().Be(0);
+            game.NumberOfFields.Should().Be(10);
         }
     }
     
