@@ -1,6 +1,7 @@
 using FakeItEasy;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using Microsoft.Win32.SafeHandles;
 using SnakesAndLaddersLib;
 namespace SnakesAndLaddersLibTests;
 
@@ -10,16 +11,18 @@ namespace SnakesAndLaddersLibTests;
 
         [TestCase(4)]
         [TestCase(3)]
-        public void CreateGame_Should_Return_InitializedGame_ForGivenNumberOfFields(int numberOfFields)
+        public void CreateGame_Should_Return_InitializedGame_ForGivenNumberOfFields(int size)
         {
-            var game = GameCreator.CreateGame(numberOfFields);
+            var game = GameCreator.CreateGame(size);
 
             using var scope = new AssertionScope();
             game.Should().NotBeNull();
             game.IsDieDisabled.Should().BeFalse();
             game.Status.Should().BeTrue();
             game.Position.Should().Be(0);
-            game.Board.Length.Should().Be(numberOfFields);
+            game.Board.Length.Should().Be(size*size); 
+            game.Board.GetLength(0).Should().Be(size);  
+            game.Board.GetLength(1).Should().Be(size);
         }
 
         [Test]
