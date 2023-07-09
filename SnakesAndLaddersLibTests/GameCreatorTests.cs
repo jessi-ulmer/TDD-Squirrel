@@ -19,7 +19,7 @@ namespace SnakesAndLaddersLibTests;
             game.IsDieDisabled.Should().BeFalse();
             game.Status.Should().BeTrue();
             game.Position.Should().Be(0);
-            game.Board.Should().HaveCount(numberOfFields);
+            game.Board.Length.Should().Be(numberOfFields);
         }
 
         [Test]
@@ -27,15 +27,13 @@ namespace SnakesAndLaddersLibTests;
         {
             var game = GameCreator.CreateGame(4);
 
-            game.Board.Should().HaveCount(4);
-            game.Board.First().Should().HaveCount(4);
-            foreach (var row in game.Board)
+            var expectedBoard = new bool[4, 4]
             {
-                foreach (var square in row)
-                {
-                    square.Should().BeFalse();
-                }
-            }
+                { false, false, false, false }, { false, false, false, false }, { false, false, false, false },
+                { false, false, false, false }
+            };
+            game.Board.Should().BeEquivalentTo(expectedBoard);
+
         }
     }
     
