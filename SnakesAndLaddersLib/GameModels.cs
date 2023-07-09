@@ -2,4 +2,5 @@
 
 public record MovingResult(int Position, bool IsFinalSquareReached);
 
-public record Game(bool IsDieDisabled, bool Status, int Position, int NumberOfFields);
+public record Game(bool IsDieDisabled, bool Status, int Position, IReadOnlyList<IReadOnlyList<bool>> Board);
+
