@@ -43,5 +43,20 @@ namespace SnakesAndLaddersLibTests
             result.IsFinalSquareReached.Should().Be(expected);
         }
 
+        [Test]
+        public void Move_Should_Return_CorrectPosition_OnBoard_ForOneSquare()
+        {
+            var position = 0;
+            const int rows = 1;
+            const int columns = 1;
+            var board = new bool[rows, columns]  { { false} };
+            A.CallTo(() => _diceRoller.RollDie()).Returns(1);
+
+            var result = _sut.Move(position, board);
+
+            var expectedPosition = (0, 0);
+            result.Position.Should().Be(expectedPosition);
+        }
+
     }
 }
