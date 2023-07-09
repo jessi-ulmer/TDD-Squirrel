@@ -27,7 +27,7 @@ namespace TDD_Squirrel.Pages
 
         private void StartNewGame()
         {
-            var game = GameCreator.CreateGame();
+            var game = GameCreator.CreateGame(10);
             DisabledDie = game.IsDieDisabled;
             ShowGame = game.Status;
             PiecePosition = game.Position;
