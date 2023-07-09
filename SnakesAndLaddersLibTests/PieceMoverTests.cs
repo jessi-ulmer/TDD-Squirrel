@@ -26,17 +26,20 @@ namespace SnakesAndLaddersLibTests
             A.CallTo(() => _diceRoller.RollDie()).Returns(fakedDie);
             using var assertionScope = new AssertionScope();
 
-            var result = _sut.Move(previousPosition);
+            var result = _sut.Move(previousPosition, 10);
             result.Position.Should().Be(expected);
 
         }
 
-        [TestCase(9, true)]
-        [TestCase(0, false)]
-        public void Move_Should_Return_GameStatus(int position, bool expected)
+        [TestCase(9, 10, true)]
+        [TestCase(0, 10, false)]
+        [TestCase(10, 15, true)]
+        [TestCase(9, 15, false)]
+        [TestCase(0, 15, false)]
+        public void Move_Should_Return_GameStatus(int position, int numberOfFields, bool expected)
         {
             A.CallTo(() => _diceRoller.RollDie()).Returns(5);
-            var result = _sut.Move(position);
+            var result = _sut.Move(position, numberOfFields);
             result.IsFinalSquareReached.Should().Be(expected);
         }
 

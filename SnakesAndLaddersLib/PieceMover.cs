@@ -9,7 +9,7 @@ public class PieceMover
         _diceRoller = diceRoller;
     }
 
-    public  MovingResult Move(int previousPosition)
+    public  MovingResult Move(int previousPosition, int numberOfFields)
     {
         var dieRoll = _diceRoller.RollDie();
         var newPosition = CalculatePosition(previousPosition, dieRoll);
