@@ -1,4 +1,30 @@
-﻿.row-content {
+﻿.game-preparation {
+    background-color: #b3c8d8;
+    border: 1px solid #00487e;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
+}
+
+.game-end-notification {
+    background-color: lightgreen;
+    border: 1px solid green;
+    border-radius: 12px;
+    color: green;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.input-content {
+    margin-right: 14px;
+}
+
+.input-numbers {
+    margin-right: 10px;
+    width: 50px;
+}
+
+.row-content {
     display: flex;
 }
 
@@ -6,15 +32,15 @@
     display: table;
 }
 
+.button-peparation {
+    margin-top: 12px;
+}
+
 .button-diece {
     background-color: transparent;
     border: none;
     margin-bottom: 10px;
 }
-
-/*.button-diece:disabled {
-    cursor: not-allowed;
-}*/
 
 .icon-cube {
     background: black;

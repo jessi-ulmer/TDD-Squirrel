@@ -1,14 +1,31 @@
 ﻿@page "/game"
 @using TDD_Squirrel.Components
-<h3>Schlange-Leiter-Spiel</h3>
 
+<h4>Spielvorbereitung</h4>
+<div class="game-preparation">
+    <span class="input-content">
+        <input type="number" class="input-numbers" name="numberOfRows" min="0" max="10" value="@NumberOfRows" /><label>Anz. Spielreihen</label>
+    </span>
+    <span class="input-content">
+        <input type="number" class="input-numbers" name="numberOfFields" min="0" max="10" value="@NumberOfFields" /><label>Anz. Spielfelder pro Reihe</label>
+    </span>
+    <br/>
+    <button @onclick="CreateGame" class="btn btn-primary button-peparation">Spielstart - Let's play</button>
+</div>
 <h4>Spielbrett</h4>
 <div>
     <button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
         <span class="icon-cube @(DisabledDie ? "icon-disabled":"")"></span>
     </button>
+    @if (DisabledDie)
+    {
+        <div class="game-end-notification">
+            Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
+        </div>
+    }
 </div>
 
+<span>Altes SPielbrett</span>
 <div>
     @for(var rowIndex = 1; rowIndex < NumberOfRows + 1; rowIndex++)
     {
