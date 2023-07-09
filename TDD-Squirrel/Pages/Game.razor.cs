@@ -20,14 +20,14 @@ namespace TDD_Squirrel.Pages
 
         private void MovePiece()
         {
-            var result =  pieceMover.Move(PiecePosition);
+            var result =  pieceMover.Move(PiecePosition, NumberOfFields);
             DisabledDie = result.IsFinalSquareReached;
             PiecePosition = result.Position;
         }
 
         private void StartNewGame()
         {
-            var game = GameCreator.CreateGame(10);
+            var game = GameCreator.CreateGame(15);
             DisabledDie = game.IsDieDisabled;
             ShowGame = game.Status;
             PiecePosition = game.Position;
