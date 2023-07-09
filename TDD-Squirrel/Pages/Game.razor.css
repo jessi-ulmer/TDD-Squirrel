@@ -12,11 +12,20 @@
     margin-bottom: 10px;
 }
 
-.button-diece:disabled {
+/*.button-diece:disabled {
     cursor: not-allowed;
-}
+}*/
 
-.cube {
+.icon-cube {
+    background: black;
+    display: inline-block;
     height: 40px;
     width: 40px;
+    mask: url(images/cube.png);
+    mask-size: cover;
+}
+
+.icon-disabled {
+    background: grey;
+    cursor: not-allowed;
 }

@@ -3,10 +3,11 @@
 <h3>Schlange-Leiter-Spiel</h3>
 
 <h4>Spielbrett</h4>
-
-<button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
-    <img src="images/cube.png" alt="game cube" class="cube"/>
-</button>
+<div>
+    <button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
+        <span class="icon-cube @(DisabledDie ? "icon-disabled":"")"></span>
+    </button>
+</div>
 
 <div>
     @for(var rowIndex = 1; rowIndex < NumberOfRows + 1; rowIndex++)
