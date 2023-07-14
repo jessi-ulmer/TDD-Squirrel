@@ -2,9 +2,10 @@
 {
     public class GameCreator
     {
-        public static Game CreateGame(int numberOfFields)
+        public static Game CreateGame(int size)
         {
-            return new Game(false, true, 0 , numberOfFields, 1, 1);    
+            var numberOfFields = size * size;
+            return new Game(false, true, 0 , numberOfFields, size, size);    
         }
     }
 }
