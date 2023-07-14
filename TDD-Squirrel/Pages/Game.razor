@@ -4,54 +4,47 @@
 <h4>Spielvorbereitung</h4>
 <div class="game-preparation">
     <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfRows" min="0" max="10" value="@NumberOfRows" /><label>Anz. Spielreihen</label>
+        <input type="number" class="input-numbers" name="numberOfRowsInput" min="0" max="10" @bind-value="@NumberOfRows" /><label>Anz. Spielreihen</label>
     </span>
     <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfFields" min="0" max="10" value="@NumberOfFields" /><label>Anz. Spielfelder pro Reihe</label>
+        <input type="number" class="input-numbers" name="numberOfFieldsInput" min="0" max="10" @bind-value="@NumberOfFields" /><label>Anz. Spielfelder pro Reihe</label>
     </span>
     <br/>
-    <button @onclick="CreateGame" class="btn btn-primary button-peparation">Spielstart - Let's play</button>
+    <button @onclick="StartNewGame" class="btn btn-primary button-peparation">Spielstart - Let's play</button>
 </div>
-<h4>Spielbrett</h4>
-<div>
-    <button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
-        <span class="icon-cube @(DisabledDie ? "icon-disabled":"")"></span>
-    </button>
-    @if (DisabledDie)
-    {
-        <div class="game-end-notification">
-            Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
-        </div>
-    }
-</div> 
-<button @onclick="StartNewGame"> Spiel starten</button>
-<div>
-    @if (ShowGame)
-    {
-        <h5>Spielbrett</h5>
-        <button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
 
-<span>Altes SPielbrett</span>
+@if (ShowGame)
+{
+    <div>
+        <h4>Spielbrett</h4>
+        <button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
+            <span class="icon-cube @(DisabledDie ? "icon-disabled":"")"></span>
+        </button>
+        @if (DisabledDie)
+        {
+            <div class="game-end-notification">
+                Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
+            </div>
+        }
+
         <div>
-            @for (var i = 1; i < NumberOfFields + 1; i++)
+            @for (var rowIndex = 0; rowIndex < NumberOfRows; rowIndex++)
             {
-                var i1 = i;
-        <div class="row-content">
-            @for (var fieldIndex = 1; fieldIndex < NumberOfFields + 1; fieldIndex++)
-            {
-                var localFieldIndex = fieldIndex;
-                <Field>
-                    @if (i1 == PiecePosition)
+                <div class="row-content">
+                    @for (var fieldIndex = 0; fieldIndex < NumberOfFields; fieldIndex++)
                     {
-                        <div class="field-content">
-                            <GameFigure></GameFigure>
-                        </div>
+                        var localFieldIndex = fieldIndex;
+                        <Field>
+                            @if (localFieldIndex == PiecePosition)
+                            {
+                                <div class="field-content">
+                                    <GameFigure></GameFigure>
+                                </div>
+                            }
+                        </Field>
                     }
-                </Field>
+                </div>
             }
         </div>
-            }
-        </div>
-    }
-
-</div>
+    </div>
+}
