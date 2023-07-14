@@ -21,5 +21,20 @@ namespace SnakesAndLaddersLibTests;
             game.Position.Should().Be(0);
             game.NumberOfFields.Should().Be(numberOfFields);
         }
+
+        [Test]
+        public void CrateGame_Should_Return_SquareGame()
+        {
+            var game = GameCreator.CreateGame(1);
+
+            using var scope = new AssertionScope();
+            game.Should().NotBeNull();
+            game.IsDieDisabled.Should().BeFalse();
+            game.Status.Should().BeTrue();
+        
+            game.Rows.Should().Be(1);
+            game.Columns.Should().Be(1);
+
+    }
     }
     
