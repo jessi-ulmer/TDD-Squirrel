@@ -22,18 +22,19 @@ namespace SnakesAndLaddersLibTests;
             game.NumberOfFields.Should().Be(numberOfFields);
         }
 
-        [Test]
-        public void CreateGame_Should_Return_SquareGame()
+        [TestCase(1, 1, 1, 1)]
+        [TestCase(2, 2, 2, 4)]
+    public void CreateGame_Should_Return_SquareGame(int size, int expectedRows, int expectedColumns, int expectedNumberOfFields)
         {
-            var game = GameCreator.CreateGame(1);
+            var game = GameCreator.CreateGame(size);
 
             using var scope = new AssertionScope();
             game.Should().NotBeNull();
             game.Status.Should().BeTrue();
             game.Position.Should().Be(0);
-            game.NumberOfFields.Should().Be(1);
-            game.Rows.Should().Be(1);
-            game.Columns.Should().Be(1);
+            game.NumberOfFields.Should().Be(expectedNumberOfFields);
+            game.Rows.Should().Be(expectedRows);
+            game.Columns.Should().Be(expectedColumns);
     }
     }
     
