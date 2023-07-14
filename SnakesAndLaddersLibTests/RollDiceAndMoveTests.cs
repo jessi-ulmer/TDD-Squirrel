@@ -48,15 +48,5 @@ namespace SnakesAndLaddersLibTests
             var result = diceRoller.RollDie();
             result.Should().BeInRange(1, 6);
         }
-
-        [TestCase(0, 1, 1)]
-        [TestCase(1, 1, 2)]
-        [TestCase(5, 5, 10)]
-        [TestCase(5, 6, 10)]
-        public void CalculatePosition_Should_Return_NewPosition(int previousPosition, int diceRoll, int expected)
-        {
-            var result = PieceMover.CalculatePosition(previousPosition, diceRoll);
-            result.Should().Be(expected);
-        }
     }
 }

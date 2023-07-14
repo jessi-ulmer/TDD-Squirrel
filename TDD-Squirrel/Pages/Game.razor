@@ -23,19 +23,25 @@
             Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
         </div>
     }
-</div>
+</div> 
+<button @onclick="StartNewGame"> Spiel starten</button>
+<div>
+    @if (ShowGame)
+    {
+        <h5>Spielbrett</h5>
+        <button @onclick="MovePiece" disabled="@DisabledDie">Die</button>
 
 <span>Altes SPielbrett</span>
-<div>
-    @for(var rowIndex = 1; rowIndex < NumberOfRows + 1; rowIndex++)
-    {
-        var localRowIndex = rowIndex;
+        <div>
+            @for (var i = 1; i < NumberOfFields + 1; i++)
+            {
+                var i1 = i;
         <div class="row-content">
             @for (var fieldIndex = 1; fieldIndex < NumberOfFields + 1; fieldIndex++)
             {
                 var localFieldIndex = fieldIndex;
                 <Field>
-                    @if (localFieldIndex == PiecePosition && localRowIndex == 1)
+                    @if (i1 == PiecePosition)
                     {
                         <div class="field-content">
                             <GameFigure></GameFigure>
@@ -44,5 +50,8 @@
                 </Field>
             }
         </div>
+            }
+        </div>
     }
+
 </div>
