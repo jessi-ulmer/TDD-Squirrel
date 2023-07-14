@@ -18,8 +18,7 @@ namespace SnakesAndLaddersLibTests;
             game.Should().NotBeNull();
             game.IsDieDisabled.Should().BeFalse();
             game.Status.Should().BeTrue();
-            game.Position.Should().Be(0);
-            game.NumberOfFields.Should().Be(numberOfFields);
+
         }
 
         [Test]
@@ -35,6 +34,6 @@ namespace SnakesAndLaddersLibTests;
             game.Rows.Should().Be(1);
             game.Columns.Should().Be(1);
 
-    }
+        }
     }
     

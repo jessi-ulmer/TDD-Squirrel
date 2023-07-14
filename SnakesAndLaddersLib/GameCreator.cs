@@ -2,9 +2,9 @@
 {
     public class GameCreator
     {
-        public static Game CreateGame(int numberOfFields)
+        public static Game CreateGame(int size)
         {
-            return new Game(false, true, 0 , numberOfFields);    
+            return new Game(false, true, default, default);    
         }
     }
 }
