@@ -4,7 +4,7 @@
     {
         public static Game CreateGame(int size)
         {
-            return new Game(false, true, default, default);    
+            return new Game(false, true, 1, 1);    
         }
     }
 }
