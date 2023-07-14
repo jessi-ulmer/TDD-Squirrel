@@ -30,8 +30,8 @@ namespace TDD_Squirrel.Pages
             var game = GameCreator.CreateGame(15);
             DisabledDie = game.IsDieDisabled;
             ShowGame = game.Status;
-            PiecePosition = game.Position;
-            NumberOfFields = game.NumberOfFields;
+            //PiecePosition = game.Position;
+            NumberOfFields = game.Rows;
         }
     }
 }
