@@ -4,7 +4,7 @@
     {
         public static Game CreateGame(int numberOfFields)
         {
-            return new Game(false, true, 0 , numberOfFields, default, default);    
+            return new Game(false, true, 0 , numberOfFields, 1, 1);    
         }
     }
 }
