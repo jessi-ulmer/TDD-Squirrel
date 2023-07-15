@@ -86,7 +86,7 @@ public class PieceMoverTests
     }
 
     [TestCaseSource(nameof(CreateMovingTestData))]
-    public void Move_Should_Return_Position((int, int) previousPosition, int movement, (int, int) expectedPosition)
+    public void Move_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
     {
         var result = previousPosition;
         while (movement > 0)
@@ -123,12 +123,12 @@ public class PieceMoverTests
 
     private static IEnumerable<TestCaseData> CreateMovingTestData()
     {
-        yield return new TestCaseData((1, 0), 1, (1, 1));
-        yield return new TestCaseData((1, 1), 1, (0, 1));
-        yield return new TestCaseData((0, 1), 1, (0, 0));
-        yield return new TestCaseData((1, 0), 2, (0, 1));
-        yield return new TestCaseData((1, 1), 2, (0, 0));
-        yield return new TestCaseData((1, 0), 3, (0, 0));
+        yield return new TestCaseData((1, 0), 1, 2, 2, (1, 1));
+        yield return new TestCaseData((1, 1), 1, 2, 2, (0, 1));
+        yield return new TestCaseData((0, 1), 1, 2, 2, (0, 0));
+        yield return new TestCaseData((1, 0), 2, 2, 2, (0, 1));
+        yield return new TestCaseData((1, 1), 2, 2, 2, (0, 0));
+        yield return new TestCaseData((1, 0), 3, 2, 2, (0, 0));
     }
 
 
