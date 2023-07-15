@@ -94,6 +94,7 @@ public class PieceMoverTests
             ((1, 1), 1) => MoveUp(previousPosition),
             ((1, 1), 2) => MoveLeft(MoveUp(previousPosition)),
             ((0, 1), 1) => MoveLeft(previousPosition),
+            ((1, 0), 3) => MoveLeft(MoveUp(MoveRight(previousPosition))),
             _ => throw new InvalidOperationException()
         };
 
