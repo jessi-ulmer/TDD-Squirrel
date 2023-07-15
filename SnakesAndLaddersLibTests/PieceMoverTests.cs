@@ -118,6 +118,10 @@ public class PieceMoverTests
             ((2, 2), 3) => Direction.Up,
             ((1,2),3) => Direction.Left,
             ((1, 1), 3) => Direction.Left,
+            ((1,0), 3) => Direction.Up,
+            ((0,0), 3) => Direction.Right,
+            ((0,1), 3) => Direction.Right,
+            
             _ => throw new InvalidOperationException()
         };
         return direction;
