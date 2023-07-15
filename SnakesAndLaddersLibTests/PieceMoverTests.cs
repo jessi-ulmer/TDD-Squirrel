@@ -1,6 +1,7 @@
 ﻿using FakeItEasy;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using NUnit.Framework.Internal;
 using SnakesAndLaddersLib;
 
 namespace SnakesAndLaddersLibTests
@@ -60,7 +61,6 @@ namespace SnakesAndLaddersLibTests
             result.Should().Be(expectedPosition);
         }
 
-
         [Test]
         public void Code_In_Test_1_1_Plus1()
         {
@@ -85,6 +85,20 @@ namespace SnakesAndLaddersLibTests
             result.Should().Be(expectedPosition);
         }
 
+        [TestCaseSource(nameof(CreateMovingTestData))]
+        public void Move_Should_Return_Position((int, int) previousPosition, int movement, (int, int) expectedPosition)
+        {
+            var result = (previousPosition.Item1, previousPosition.Item2);
+
+            result.Should().Be(expectedPosition);
+        }
+
+        private static IEnumerable<TestCaseData> CreateMovingTestData()
+        {
+            yield return new TestCaseData((1, 0), 1, (1, 1));
+            yield return new TestCaseData((1, 1), 1, (0, 1)); 
+            yield return new TestCaseData((0, 1), 1, (0, 0));
+        }
 
 
         //[TestCase(9, 10, true)]
