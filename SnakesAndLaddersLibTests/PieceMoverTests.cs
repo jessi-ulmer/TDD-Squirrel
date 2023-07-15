@@ -116,6 +116,8 @@ public class PieceMoverTests
             ((2, 0), 3) => Direction.Right,
             ((2, 1), 3) => Direction.Right,
             ((2, 2), 3) => Direction.Up,
+            ((1,2),3) => Direction.Left,
+            ((1, 1), 3) => Direction.Left,
             _ => throw new InvalidOperationException()
         };
         return direction;
@@ -156,6 +158,9 @@ public class PieceMoverTests
         yield return new TestCaseData((2, 0), 1, 3, 3, (2, 1));
         yield return new TestCaseData((2, 0), 2, 3, 3, (2, 2));
         yield return new TestCaseData((2, 2), 1, 3, 3, (1, 2));
+        yield return new TestCaseData((1, 2), 1, 3, 3, (1, 1));
+        yield return new TestCaseData((1, 2), 3, 3, 3, (0, 0));
+        yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
     }
 
 
