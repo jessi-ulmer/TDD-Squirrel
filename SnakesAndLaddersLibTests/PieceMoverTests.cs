@@ -87,11 +87,13 @@ public class PieceMoverTests
     [TestCaseSource(nameof(CreateMovingTestData))]
     public void Move_Should_Return_Position((int, int) previousPosition, int movement, (int, int) expectedPosition)
     {
-        var result = (previousPosition) switch
+        var result = (previousPosition, movement) switch
         {
-            (1, 0) => (previousPosition.Item1, previousPosition.Item2 + 1),
-            (1, 1) => (previousPosition.Item1 - 1, previousPosition.Item2),
-            (0, 1) => (previousPosition.Item1, previousPosition.Item2 - 1),
+            ((1, 0), 1) => (previousPosition.Item1, previousPosition.Item2 + 1),
+            ((1, 0), 2) => (previousPosition.Item1 - 1, previousPosition.Item2 + 1),
+            ((1, 1), 1) => (previousPosition.Item1 - 1, previousPosition.Item2),
+            ((1, 1), 2) => (previousPosition.Item1 - 1, previousPosition.Item2 - 1),
+            ((0, 1), 1) => (previousPosition.Item1, previousPosition.Item2 - 1),
             _ => throw new InvalidOperationException()
         };
 
