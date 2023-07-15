@@ -91,11 +91,12 @@ public class PieceMoverTests
         var result = previousPosition;
         while (movement > 0)
         {
-            result = (result) switch
+            var direction = DecideDirection(result, rows);
+            result = (direction) switch
             {
-                (1, 0) => MoveRight(result),
-                (1, 1) => MoveUp(result),
-                (0, 1) => MoveLeft(result),
+                Direction.Right => MoveRight(result),
+                Direction.Up => MoveUp(result),
+                Direction.Left => MoveLeft(result),
                 _ => throw new InvalidOperationException()
             };
             movement--;
@@ -103,6 +104,27 @@ public class PieceMoverTests
 
 
         result.Should().Be(expectedPosition);
+    }
+
+    private Direction DecideDirection((int, int) position, int rows)
+    {
+        var direction = (position, rows) switch
+        {
+            ((1,0), 2) => Direction.Right,
+            ((1,1), 2) => Direction.Up,
+            ((0,1), 2) => Direction.Left,
+            ((2,0), 3) => Direction.Right,
+            _ => throw new InvalidOperationException()
+        };
+        return direction;
+    }
+
+    private enum Direction
+    {
+        None,
+        Right,
+        Up, 
+        Left,
     }
 
     private static (int, int) MoveLeft((int, int) previousPosition)
@@ -129,6 +151,7 @@ public class PieceMoverTests
         yield return new TestCaseData((1, 0), 2, 2, 2, (0, 1));
         yield return new TestCaseData((1, 1), 2, 2, 2, (0, 0));
         yield return new TestCaseData((1, 0), 3, 2, 2, (0, 0));
+        yield return new TestCaseData((2, 0), 1, 3, 3, (2, 1));
     }
 
 
