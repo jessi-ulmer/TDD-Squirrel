@@ -1,4 +1,5 @@
-﻿using FakeItEasy;
+﻿using System.Diagnostics;
+using FakeItEasy;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using SnakesAndLaddersLib;
@@ -86,23 +87,13 @@ public class PieceMoverTests
     [TestCaseSource(nameof(CreateMovingTestData))]
     public void Move_Should_Return_Position((int, int) previousPosition, int movement, (int, int) expectedPosition)
     {
-        (int, int) result;
-        if (previousPosition == (1, 0))
+        var result = (previousPosition) switch
         {
-            result = (previousPosition.Item1, previousPosition.Item2 + 1);
-        }
-        else if (previousPosition == (1, 1))
-        {
-            result = (previousPosition.Item1 - 1, previousPosition.Item2);
-        } else if (previousPosition == (0, 1))
-        {
-            result = (previousPosition.Item1, previousPosition.Item2 - 1);
-        }
-        else
-        {
-            throw new Exception();
-        }
-
+            (1, 0) => (previousPosition.Item1, previousPosition.Item2 + 1),
+            (1, 1) => (previousPosition.Item1 - 1, previousPosition.Item2),
+            (0, 1) => (previousPosition.Item1, previousPosition.Item2 - 1),
+            _ => throw new InvalidOperationException()
+        };
 
         result.Should().Be(expectedPosition);
     }
