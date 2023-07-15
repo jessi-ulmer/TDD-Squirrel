@@ -108,23 +108,21 @@ public class PieceMoverTests
 
     private Direction DecideDirection((int, int) position, int rows)
     {
-        var isRightMovingRow = (rows - position.Item1) % 2 == 1; // (position.Item1 == rows - 1 || position.Item1 == rows - 3);
-        var isLeftMovingRow = (rows - position.Item1) % 2 == 0; // (position.Item1 == rows - 2 || position.Item1 == rows - 4);
+        var isRightMovingRow = (rows - position.Item1) % 2 == 1;
 
         var isMovingUp = (isRightMovingRow && (position.Item2 == rows - 1)) ||
-                         (isLeftMovingRow && (position.Item2 == 0));
-        var direction = Direction.None;
+                         (!isRightMovingRow && (position.Item2 == 0));
+        Direction direction;
         if (isMovingUp)
         {
             direction = Direction.Up;
 
-        } else if (isLeftMovingRow)
-        {
-            direction = Direction.Left;
-        } else if (isRightMovingRow)
-        {
-            direction = Direction.Right;
         }
+        else
+        {
+            direction = isRightMovingRow ? Direction.Right : Direction.Left;
+        }
+
         return direction;
     }
 
