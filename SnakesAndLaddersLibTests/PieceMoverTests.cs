@@ -68,7 +68,19 @@ namespace SnakesAndLaddersLibTests
             const int movement = 1;
             var expectedPosition = (0, 1);
 
-            var result = (previousPosition.Item1, previousPosition.Item2 + movement);
+            var result = (previousPosition.Item1 - movement, previousPosition.Item2);
+
+            result.Should().Be(expectedPosition);
+        }
+
+        [Test]
+        public void Code_In_Test_0_1_Plus1()
+        {
+            var previousPosition = (0, 1);
+            const int movement = 1;
+            var expectedPosition = (0, 0);
+
+            var result = (previousPosition.Item1, previousPosition.Item2);
 
             result.Should().Be(expectedPosition);
         }
