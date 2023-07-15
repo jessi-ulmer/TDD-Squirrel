@@ -49,42 +49,6 @@ public class PieceMoverTests
         result.IsFinalSquareReached.Should().BeFalse();
     }
 
-    [Test]
-    public void Code_In_Test_StartPlus1()
-    {
-        var previousPosition = (1, 0);
-        const int movement = 1;
-        var expectedPosition = (1, 1);
-
-        var result = (previousPosition.Item1, previousPosition.Item2 + movement);
-
-        result.Should().Be(expectedPosition);
-    }
-
-    [Test]
-    public void Code_In_Test_1_1_Plus1()
-    {
-        var previousPosition = (1, 1);
-        const int movement = 1;
-        var expectedPosition = (0, 1);
-
-        var result = (previousPosition.Item1 - movement, previousPosition.Item2);
-
-        result.Should().Be(expectedPosition);
-    }
-
-    [Test]
-    public void Code_In_Test_0_1_Plus1()
-    {
-        var previousPosition = (0, 1);
-        const int movement = 1;
-        var expectedPosition = (0, 0);
-
-        var result = (previousPosition.Item1, previousPosition.Item2 - movement);
-
-        result.Should().Be(expectedPosition);
-    }
-
     [TestCaseSource(nameof(CreateMovingTestData))]
     public void PieceMoverMove_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
     {
@@ -94,71 +58,6 @@ public class PieceMoverTests
         var expectation = new MovingResult(expectedPosition, false);
         result.Should().Be(expectation);
     }
-
-    [TestCaseSource(nameof(CreateMovingTestData))]
-    public void Move_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
-    {
-        var result = previousPosition;
-        while (movement > 0)
-        {
-            var direction = DecideDirection(result, rows);
-            result = (direction) switch
-            {
-                Direction.Right => MoveRight(result),
-                Direction.Up => MoveUp(result),
-                Direction.Left => MoveLeft(result),
-                _ => throw new InvalidOperationException()
-            };
-            movement--;
-        }
-
-
-        result.Should().Be(expectedPosition);
-    }
-
-    private Direction DecideDirection((int, int) position, int rows)
-    {
-        var isRightMovingRow = (rows - position.Item1) % 2 == 1;
-
-        var isMovingUp = (isRightMovingRow && (position.Item2 == rows - 1)) ||
-                         (!isRightMovingRow && (position.Item2 == 0));
-        Direction direction;
-        if (isMovingUp)
-        {
-            direction = Direction.Up;
-
-        }
-        else
-        {
-            direction = isRightMovingRow ? Direction.Right : Direction.Left;
-        }
-
-        return direction;
-    }
-
-    private enum Direction
-    {
-        None,
-        Right,
-        Up, 
-        Left,
-    }
-
-    private static (int, int) MoveLeft((int, int) previousPosition)
-    {
-        return (previousPosition.Item1, previousPosition.Item2 - 1);
-    }
-
-    private static (int, int) MoveUp((int, int) previousPosition)
-    {
-        return (previousPosition.Item1 - 1, previousPosition.Item2);
-    }
-
-    private static (int, int) MoveRight((int, int) previousPosition)
-    {
-        return (previousPosition.Item1, previousPosition.Item2 + 1);
-    }
-
 
     private static IEnumerable<TestCaseData> CreateMovingTestData()
     {
