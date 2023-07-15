@@ -86,6 +86,16 @@ public class PieceMoverTests
     }
 
     [TestCaseSource(nameof(CreateMovingTestData))]
+    public void PieceMoverMove_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
+    {
+        A.CallTo(() => _diceRoller.RollDie()).Returns(movement);
+        var result = _sut.Move(previousPosition, rows, columns);
+
+        var expectation = new MovingResult(expectedPosition, false);
+        result.Should().Be(expectation);
+    }
+
+    [TestCaseSource(nameof(CreateMovingTestData))]
     public void Move_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
     {
         var result = previousPosition;
