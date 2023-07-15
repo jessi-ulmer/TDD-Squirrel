@@ -12,6 +12,16 @@ public class PieceMover
     public  MovingResult Move((int, int) previousPosition, int rows, int columns)
     {
         var movement = _diceRoller.RollDie();
+        
+        // ToDO: movement größer als verbleibende Felder!
+        var newPosition = CalculatePosition(previousPosition, movement, rows);
+        //var gameFinished = newPosition == numberOfFields;
+        return new MovingResult(newPosition, false);
+    }
+
+    private static (int, int) CalculatePosition((int, int) previousPosition, int movement, int rows)
+    {
+
         var newPosition = previousPosition;
         while (movement > 0)
         {
@@ -25,12 +35,12 @@ public class PieceMover
             };
             movement--;
         }
-       // var newPosition = ((int)default!, (int)default!); //CalculatePosition(previousPosition, dieRoll, numberOfFields);
-        //var gameFinished = newPosition == numberOfFields;
-        return new MovingResult(newPosition, false);
+        return newPosition;
+        
+        
     }
 
-    private Direction DecideDirection((int, int) position, int rows)
+    private static Direction DecideDirection((int, int) position, int rows)
     {
         var isRightMovingRow = (rows - position.Item1) % 2 == 1;
 
@@ -66,12 +76,7 @@ public class PieceMover
         return (previousPosition.Item1, previousPosition.Item2 + 1);
     }
 
-    private static (int, int) CalculatePosition((int, int) previousPosition, int dieResult, int numberOfFields)
-    {
-        //var nextPosition = previousPosition + dieResult;
-        //return Math.Min(nextPosition, numberOfFields);
-        return (0, 1);
-    }
+
 
     private enum Direction
     {
