@@ -89,16 +89,32 @@ public class PieceMoverTests
     {
         var result = (previousPosition, movement) switch
         {
-            ((1, 0), 1) => (previousPosition.Item1, previousPosition.Item2 + 1),
-            ((1, 0), 2) => (previousPosition.Item1 - 1, previousPosition.Item2 + 1),
-            ((1, 1), 1) => (previousPosition.Item1 - 1, previousPosition.Item2),
-            ((1, 1), 2) => (previousPosition.Item1 - 1, previousPosition.Item2 - 1),
-            ((0, 1), 1) => (previousPosition.Item1, previousPosition.Item2 - 1),
+            ((1, 0), 1) => MoveRight(previousPosition),
+            ((1, 0), 2) => MoveUp(MoveRight(previousPosition)),
+            ((1, 1), 1) => MoveUp(previousPosition),
+            ((1, 1), 2) => MoveLeft(MoveUp(previousPosition)),
+            ((0, 1), 1) => MoveLeft(previousPosition),
             _ => throw new InvalidOperationException()
         };
 
         result.Should().Be(expectedPosition);
     }
+
+    private static (int, int) MoveLeft((int, int) previousPosition)
+    {
+        return (previousPosition.Item1, previousPosition.Item2 - 1);
+    }
+
+    private static (int, int) MoveUp((int, int) previousPosition)
+    {
+        return (previousPosition.Item1 - 1, previousPosition.Item2);
+    }
+
+    private static (int, int) MoveRight((int, int) previousPosition)
+    {
+        return (previousPosition.Item1, previousPosition.Item2 + 1);
+    }
+
 
     private static IEnumerable<TestCaseData> CreateMovingTestData()
     {
