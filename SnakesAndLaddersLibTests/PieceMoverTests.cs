@@ -35,14 +35,14 @@ namespace SnakesAndLaddersLibTests
         public void Move_Should_Return_Result_ForMovingOneSquare()
         {
             A.CallTo(() => _diceRoller.RollDie()).Returns(1);
-            var previousPosition = (0, 0);
+            var previousPosition = (1, 0);
             var rows = 2;
             var columns = 2;
             var result = _sut.Move(previousPosition, rows, columns);
 
             using var assertionScope = new AssertionScope();
 
-            var expectedPosition = (0, 1);
+            var expectedPosition = (1, 1);
             result.Position.Should().Be(expectedPosition);
             result.IsFinalSquareReached.Should().BeFalse();
 
