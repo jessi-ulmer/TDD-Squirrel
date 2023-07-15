@@ -48,6 +48,18 @@ namespace SnakesAndLaddersLibTests
 
         }
 
+        [Test]
+        public void Code_In_Test()
+        {
+            var previousPosition = (1, 0);
+            const int movement = 1;
+            var expectedPosition = (1, 1);
+            
+            var result = (previousPosition.Item1, previousPosition.Item2);
+
+            result.Should().Be(expectedPosition);
+        }
+
         //[TestCase(9, 10, true)]
         //[TestCase(0, 10, false)]
         //[TestCase(10, 15, true)]
