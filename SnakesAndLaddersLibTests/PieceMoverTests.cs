@@ -100,7 +100,7 @@ public class PieceMoverTests
         }
         else
         {
-            result = (previousPosition.Item1, previousPosition.Item2);
+            throw new Exception();
         }
 
 
