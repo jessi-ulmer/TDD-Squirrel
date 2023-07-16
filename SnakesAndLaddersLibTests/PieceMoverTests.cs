@@ -37,7 +37,7 @@ public class PieceMoverTests
     public void Move_Should_Return_Result_ForMovingOneSquare()
     {
         A.CallTo(() => _diceRoller.RollDie()).Returns(1);
-        var previousPosition = (1, 0);
+        var previousPosition = new Position(1, 0);
         var rows = 2;
         var columns = 2;
         var result = _sut.Move(previousPosition, rows, columns);

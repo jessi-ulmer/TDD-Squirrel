@@ -9,7 +9,7 @@ public class PieceMover
         _diceRoller = diceRoller;
     }
 
-    public  MovingResult Move((int, int) previousPosition, int rows, int columns)
+    public  MovingResult Move(Position previousPosition, int rows, int columns)
     {
         var movement = _diceRoller.RollDie();
         
@@ -18,14 +18,14 @@ public class PieceMover
         return new MovingResult(newPosition, gameFinished);
     }
 
-    private static bool IsFinalSquareReached((int, int) position, int rows)
+    private static bool IsFinalSquareReached(Position position, int rows)
     {
-        var finalSquare = (rows % 2 == 0) ? (0, 0) : (0, rows - 1);
+        var finalSquare = (rows % 2 == 0) ? new Position(0, 0) : new Position (0, rows - 1);
         var isFinalSquareReached = (finalSquare == position);
         return isFinalSquareReached;
     }
 
-    private static (int, int) CalculatePosition((int, int) previousPosition, int movement, int rows)
+    private static Position CalculatePosition(Position previousPosition, int movement, int rows)
     {
 
         var newPosition = previousPosition;
@@ -39,14 +39,14 @@ public class PieceMover
                 Direction.Left => MoveLeft(newPosition),
                 _ => throw new InvalidOperationException()
             };
-            if (newPosition == (-1, 0))
+            if (newPosition == new Position(-1, 0))
             {
-                return (0,0);
+                return new Position(0,0);
             }
 
-            if (newPosition == (-1, rows - 1))
+            if (newPosition == new Position(-1, rows - 1))
             {
-                return (0, rows - 1);
+                return new Position(0, rows - 1);
             }
             movement--;
         }
@@ -55,12 +55,12 @@ public class PieceMover
         
     }
 
-    private static Direction DecideDirection((int, int) position, int rows)
+    private static Direction DecideDirection(Position position, int rows)
     {
-        var isRightMovingRow = (rows - position.Item1) % 2 == 1;
+        var isRightMovingRow = (rows - position.X) % 2 == 1;
 
-        var isMovingUp = (isRightMovingRow && (position.Item2 == rows - 1)) ||
-                         (!isRightMovingRow && (position.Item2 == 0));
+        var isMovingUp = (isRightMovingRow && (position.Y == rows - 1)) ||
+                         (!isRightMovingRow && (position.Y == 0));
         Direction direction;
         if (isMovingUp)
         {
@@ -76,19 +76,19 @@ public class PieceMover
     }
 
 
-    private static (int, int) MoveLeft((int, int) previousPosition)
+    private static Position MoveLeft(Position previousPosition)
     {
-        return (previousPosition.Item1, previousPosition.Item2 - 1);
+        return new Position(previousPosition.X, previousPosition.Y - 1);
     }
 
-    private static (int, int) MoveUp((int, int) previousPosition)
+    private static Position MoveUp(Position previousPosition)
     {
-        return (previousPosition.Item1 - 1, previousPosition.Item2);
+        return new Position(previousPosition.X - 1, previousPosition.Y);
     }
 
-    private static (int, int) MoveRight((int, int) previousPosition)
+    private static Position MoveRight(Position previousPosition)
     {
-        return (previousPosition.Item1, previousPosition.Item2 + 1);
+        return new Position(previousPosition.X, previousPosition.Y + 1);
     }
 
 
