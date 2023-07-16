@@ -75,7 +75,9 @@ public class PieceMoverTests
         yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
         yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
         yield return new TestCaseData((1, 1), 4, 4, 4, (0, 2));
-        yield return new TestCaseData((1, 0), 4, 2, 2, (0, 0));
+        yield return new TestCaseData((1, 0), 4, 2, 2, (0, 0)).SetName("Stop at End, Size 2");
+        yield return new TestCaseData((0, 3), 4, 4, 4, (0, 0)).SetName("Stop at End, Size 4");
+        yield return new TestCaseData((1,0), 4, 3, 3, (0, 2)).SetName("Stop at End, Size 3");
     }
 
 
