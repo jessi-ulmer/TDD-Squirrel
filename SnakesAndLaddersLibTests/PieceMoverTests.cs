@@ -19,35 +19,6 @@ public class PieceMoverTests
         _sut = new PieceMover(_diceRoller);
     }
 
-    //[TestCase(0, 1, 1)]
-    //[TestCase(5, 2, 7)]
-    //[TestCase(5, 5, 10)]
-    //[TestCase(7, 6, 10)]
-    //public void Move_Should_Return_PositionInRange(int previousPosition, int fakedDie, int expected)
-    //{
-    //    A.CallTo(() => _diceRoller.RollDie()).Returns(fakedDie);
-    //    using var assertionScope = new AssertionScope();
-
-    //    var result = _sut.Move(previousPosition, 10);
-    //    result.Position.Should().Be(expected);
-
-    //}
-
-    [Test]
-    public void Move_Should_Return_Result_ForMovingOneSquare()
-    {
-        A.CallTo(() => _diceRoller.RollDie()).Returns(1);
-        var previousPosition = new Position(1, 0);
-        var rows = 2;
-        var columns = 2;
-        var result = _sut.Move(previousPosition, rows, columns);
-
-        using var assertionScope = new AssertionScope();
-
-        var expectedPosition = (1, 1);
-        result.Position.Should().Be(expectedPosition);
-        result.IsFinalSquareReached.Should().BeFalse();
-    }
 
     [TestCaseSource(nameof(CreateMovingTestData))]
     public void PieceMoverMove_Should_Return_Position(Position previousPosition, int movement, int rows, int columns, Position expectedPosition, bool expectedFinalSquare)
@@ -78,17 +49,4 @@ public class PieceMoverTests
         yield return new TestCaseData(new Position(0, 3), 4, 4, 4, new Position(0, 0), true).SetName("Stop at End, Size 4");
         yield return new TestCaseData(new Position(1, 0), 4, 3, 3, new Position(0, 2), true).SetName("Stop at End, Size 3");
     }
-
-
-    //[TestCase(9, 10, true)]
-    //[TestCase(0, 10, false)]
-    //[TestCase(10, 15, true)]
-    //[TestCase(9, 15, false)]
-    //[TestCase(0, 15, false)]
-    //public void Move_Should_Return_GameStatus(int position, int numberOfFields, bool expected)
-    //{
-    //    A.CallTo(() => _diceRoller.RollDie()).Returns(5);
-    //    var result = _sut.Move(position, numberOfFields);
-    //    result.IsFinalSquareReached.Should().Be(expected);
-    //}
 }
