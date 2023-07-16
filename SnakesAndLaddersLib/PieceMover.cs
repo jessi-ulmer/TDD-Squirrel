@@ -13,10 +13,16 @@ public class PieceMover
     {
         var movement = _diceRoller.RollDie();
         
-        // ToDO: movement größer als verbleibende Felder!
         var newPosition = CalculatePosition(previousPosition, movement, rows);
-        //var gameFinished = newPosition == numberOfFields;
-        return new MovingResult(newPosition, false);
+        var gameFinished = IsFinalSquareReached(newPosition, rows);
+        return new MovingResult(newPosition, gameFinished);
+    }
+
+    private static bool IsFinalSquareReached((int, int) position, int rows)
+    {
+        var finalSquare = (rows % 2 == 0) ? (0, 0) : (0, rows - 1);
+        var isFinalSquareReached = (finalSquare == position);
+        return isFinalSquareReached;
     }
 
     private static (int, int) CalculatePosition((int, int) previousPosition, int movement, int rows)
