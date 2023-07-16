@@ -1,4 +1,5 @@
-﻿using SnakesAndLaddersLib;
+﻿using Microsoft.AspNetCore.Components;
+using SnakesAndLaddersLib;
 
 namespace TDD_Squirrel.Pages
 {
@@ -8,10 +9,11 @@ namespace TDD_Squirrel.Pages
 
         private int NumberOfFields = 4;
         private int NumberOfRows = 1;
+        private bool _isPlayingFieldSquare;
 
         private int PiecePosition = 1;
-        private bool DisabledDie = false;
-        private bool ShowGame = false;
+        private bool DisabledDie;
+        private bool ShowGame;
 
         public Game()
         {
@@ -34,6 +36,15 @@ namespace TDD_Squirrel.Pages
             NumberOfFields = game.NumberOfFields;
 
             StateHasChanged();
+        }
+
+        private void OnIsPlayingFieldSquareValueChanged(ChangeEventArgs e)
+        {
+            _isPlayingFieldSquare = !_isPlayingFieldSquare;
+
+            NumberOfRows = _isPlayingFieldSquare
+                ? 0
+                : 1;
         }
     }
 }
