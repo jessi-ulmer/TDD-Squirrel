@@ -33,6 +33,15 @@ public class PieceMover
                 Direction.Left => MoveLeft(newPosition),
                 _ => throw new InvalidOperationException()
             };
+            if (newPosition == (-1, 0))
+            {
+                return (0,0);
+            }
+
+            if (newPosition == (-1, rows - 1))
+            {
+                return (0, rows - 1);
+            }
             movement--;
         }
         return newPosition;
