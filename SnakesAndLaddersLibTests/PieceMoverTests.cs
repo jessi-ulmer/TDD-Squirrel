@@ -50,34 +50,33 @@ public class PieceMoverTests
     }
 
     [TestCaseSource(nameof(CreateMovingTestData))]
-    public void PieceMoverMove_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition)
+    public void PieceMoverMove_Should_Return_Position((int, int) previousPosition, int movement, int rows, int columns, (int, int) expectedPosition, bool expectedFinalSquare)
     {
         A.CallTo(() => _diceRoller.RollDie()).Returns(movement);
         var result = _sut.Move(previousPosition, rows, columns);
 
-        var expectation = new MovingResult(expectedPosition, false);
+        var expectation = new MovingResult(expectedPosition, expectedFinalSquare);
         result.Should().Be(expectation);
     }
 
     private static IEnumerable<TestCaseData> CreateMovingTestData()
     {
-        yield return new TestCaseData((1, 0), 1, 2, 2, (1, 1));
-        yield return new TestCaseData((1, 1), 1, 2, 2, (0, 1));
-        yield return new TestCaseData((0, 1), 1, 2, 2, (0, 0));
-        yield return new TestCaseData((1, 0), 2, 2, 2, (0, 1));
-        yield return new TestCaseData((1, 1), 2, 2, 2, (0, 0));
-        yield return new TestCaseData((1, 0), 3, 2, 2, (0, 0));
-        yield return new TestCaseData((2, 0), 1, 3, 3, (2, 1));
-        yield return new TestCaseData((2, 0), 2, 3, 3, (2, 2));
-        yield return new TestCaseData((2, 2), 1, 3, 3, (1, 2));
-        yield return new TestCaseData((1, 2), 1, 3, 3, (1, 1));
-        yield return new TestCaseData((1, 2), 3, 3, 3, (0, 0));
-        yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
-        yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
-        yield return new TestCaseData((1, 1), 4, 4, 4, (0, 2));
-        yield return new TestCaseData((1, 0), 4, 2, 2, (0, 0)).SetName("Stop at End, Size 2");
-        yield return new TestCaseData((0, 3), 4, 4, 4, (0, 0)).SetName("Stop at End, Size 4");
-        yield return new TestCaseData((1,0), 4, 3, 3, (0, 2)).SetName("Stop at End, Size 3");
+        yield return new TestCaseData((1, 0), 1, 2, 2, (1, 1), false);
+        yield return new TestCaseData((1, 1), 1, 2, 2, (0, 1), false);
+        yield return new TestCaseData((0, 1), 1, 2, 2, (0, 0), true);
+        yield return new TestCaseData((1, 0), 2, 2, 2, (0, 1), false);
+        yield return new TestCaseData((1, 1), 2, 2, 2, (0, 0), true);
+        yield return new TestCaseData((1, 0), 3, 2, 2, (0, 0), true);
+        yield return new TestCaseData((2, 0), 1, 3, 3, (2, 1), false);
+        yield return new TestCaseData((2, 0), 2, 3, 3, (2, 2), false);
+        yield return new TestCaseData((2, 2), 1, 3, 3, (1, 2), false);
+        yield return new TestCaseData((1, 2), 1, 3, 3, (1, 1), false);
+        yield return new TestCaseData((1, 2), 3, 3, 3, (0, 0), false);
+        yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2), true);
+        yield return new TestCaseData((1, 1), 4, 4, 4, (0, 2), false);
+        yield return new TestCaseData((1, 0), 4, 2, 2, (0, 0), true).SetName("Stop at End, Size 2");
+        yield return new TestCaseData((0, 3), 4, 4, 4, (0, 0), true).SetName("Stop at End, Size 4");
+        yield return new TestCaseData((1,0), 4, 3, 3, (0, 2), true).SetName("Stop at End, Size 3");
     }
 
 
