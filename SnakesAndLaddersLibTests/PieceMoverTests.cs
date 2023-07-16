@@ -75,6 +75,7 @@ public class PieceMoverTests
         yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
         yield return new TestCaseData((1, 2), 5, 3, 3, (0, 2));
         yield return new TestCaseData((1, 1), 4, 4, 4, (0, 2));
+        yield return new TestCaseData((1, 0), 4, 2, 2, (0, 0));
     }
 
 
