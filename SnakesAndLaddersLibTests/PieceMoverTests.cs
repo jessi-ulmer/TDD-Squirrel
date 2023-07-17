@@ -1,69 +1,58 @@
-﻿using System.Data;
+﻿using System.Diagnostics;
 using FakeItEasy;
+using FakeItEasy.Core;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using SnakesAndLaddersLib;
 
-namespace SnakesAndLaddersLibTests
+namespace SnakesAndLaddersLibTests;
+
+public class PieceMoverTests
 {
-    public class PieceMoverTests
+    private IDiceRoller _diceRoller;
+    private PieceMover _sut;
+
+    [SetUp]
+    public void SetUp()
     {
-        private IDiceRoller _diceRoller;
-        private PieceMover _sut;
+        _diceRoller = A.Fake<IDiceRoller>();
+        _sut = new PieceMover(_diceRoller);
+    }
 
-        [SetUp]
-        public void SetUp()
-        {
-            _diceRoller = A.Fake<IDiceRoller>();
-            _sut = new PieceMover(_diceRoller);
-        }
 
-        [TestCase(0, 1, 1)]
-        [TestCase(5, 2, 7)]
-        [TestCase(5, 5, 10)]
-        [TestCase(7, 6, 10)]
-        public void Move_Should_Return_PositionInRange(int previousPosition, int fakedDie, int expected)
-        {
-            A.CallTo(() => _diceRoller.RollDie()).Returns(fakedDie);
-            using var assertionScope = new AssertionScope();
+    [TestCaseSource(nameof(CreateMovingTestData))]
+    public void PieceMoverMove_Should_Return_Position(Position previousPosition, int movement, int rows, int columns, Position expectedPosition, bool expectedFinalSquare)
+    {
+        A.CallTo(() => _diceRoller.RollDie()).Returns(movement);
+        var result = _sut.Move(previousPosition, rows, columns);
 
-            var board = new bool[1, 10] { { false, false, false, false, false, false, false, false, false, false} };
+        var expectation = new MovingResult(expectedPosition, expectedFinalSquare);
+        result.Should().Be(expectation);
+    }
 
-            var result = _sut.Move(previousPosition, board);
-            result.Position.Should().Be((0, expected));
-
-        }
-
-        [TestCase(9, 10, true)]
-        [TestCase(0, 10, false)]
-        [TestCase(10, 15, true)]
-        [TestCase(9, 15, false)]
-        [TestCase(0, 15, false)]
-        public void Move_Should_Return_GameStatus(int position, int numberOfFields, bool expected)
-        {
-            A.CallTo(() => _diceRoller.RollDie()).Returns(5);
-            var board = (numberOfFields == 10) 
-                ? new bool[1, 10] { { false, false, false, false, false, false, false, false, false, false } }
-                : new bool[1, 15] { { false, false, false, false, false, false, false, false, false, false, false , false, false, false, false } };
-
-            var result = _sut.Move(position, board);
-            result.IsFinalSquareReached.Should().Be(expected);
-        }
-
-        [Test]
-        public void Move_Should_Return_CorrectPosition_OnBoard_ForOneSquare()
-        {
-            var position = 0;
-            const int rows = 1;
-            const int columns = 1;
-            var board = new bool[rows, columns]  { { false} };
+    private static IEnumerable<TestCaseData> CreateMovingTestData()
+    {
+        yield return new TestCaseData(new Position(1, 0), 1, 2, 2, new Position(1, 1), false);
+        yield return new TestCaseData(new Position(1, 1), 1, 2, 2, new Position(0, 1), false);
+        yield return new TestCaseData(new Position(0, 1), 1, 2, 2, new Position(0, 0), true);
+        yield return new TestCaseData(new Position(1, 0), 2, 2, 2, new Position(0, 1), false);
+        yield return new TestCaseData(new Position(1, 1), 2, 2, 2, new Position(0, 0), true);
+        yield return new TestCaseData(new Position(1, 0), 3, 2, 2, new Position(0, 0), true);
+        yield return new TestCaseData(new Position(2, 0), 1, 3, 3, new Position(2, 1), false);
+        yield return new TestCaseData(new Position(2, 0), 2, 3, 3, new Position(2, 2), false);
+        yield return new TestCaseData(new Position(2, 2), 1, 3, 3, new Position(1, 2), false);
+        yield return new TestCaseData(new Position(1, 2), 1, 3, 3, new Position(1, 1), false);
+        yield return new TestCaseData(new Position(1, 2), 3, 3, 3, new Position(0, 0), false);
+        yield return new TestCaseData(new Position(1, 2), 5, 3, 3, new Position(0, 2), true);
+        yield return new TestCaseData(new Position(1, 1), 4, 4, 4, new Position(0, 2), false);
+        yield return new TestCaseData(new Position(1, 0), 4, 2, 2, new Position(0, 0), true).SetName("Stop at End, Size 2");
+        yield return new TestCaseData(new Position(0, 3), 4, 4, 4, new Position(0, 0), true).SetName("Stop at End, Size 4");
+        yield return new TestCaseData(new Position(1, 0), 4, 3, 3, new Position(0, 2), true).SetName("Stop at End, Size 3");
             A.CallTo(() => _diceRoller.RollDie()).Returns(1);
 
             var result = _sut.Move(position, board);
 
             var expectedPosition = (0, 0);
             result.Position.Should().Be(expectedPosition);
-        }
-
     }
 }

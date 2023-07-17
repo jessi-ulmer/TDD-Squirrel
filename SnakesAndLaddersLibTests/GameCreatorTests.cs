@@ -1,27 +1,25 @@
-using FakeItEasy;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.Win32.SafeHandles;
 using SnakesAndLaddersLib;
+
 namespace SnakesAndLaddersLibTests;
 
-    public class GameCreatorTests
+public class GameCreatorTests
+{
+    [TestCase(1, 1, 1)]
+    [TestCase(2, 2, 2)]
+    public void CrateGame_Should_Return_SquareGame(int size, int expectedRows, int expectedColumns)
     {
+        var game = GameCreator.CreateGame(size);
 
+        using var scope = new AssertionScope();
+        game.Should().NotBeNull();
+        game.IsDieDisabled.Should().BeFalse();
+        game.Status.Should().BeTrue();
 
-        [TestCase(4)]
-        [TestCase(3)]
-        public void CreateGame_Should_Return_InitializedGame_ForGivenNumberOfFields(int size)
-        {
-            var game = GameCreator.CreateGame(size);
-
-            using var scope = new AssertionScope();
-            game.Should().NotBeNull();
-            game.IsDieDisabled.Should().BeFalse();
-            game.Status.Should().BeTrue();
-            game.Position.Should().Be(0);
-            game.Board.Length.Should().Be(size*size); 
-            game.Board.GetLength(0).Should().Be(size);  
+        game.Rows.Should().Be(expectedRows);
+        game.Columns.Should().Be(expectedColumns);
             game.Board.GetLength(1).Should().Be(size);
         }
 
@@ -37,6 +35,5 @@ namespace SnakesAndLaddersLibTests;
             };
             game.Board.Should().BeEquivalentTo(expectedBoard);
 
-        }
     }
-    
+}

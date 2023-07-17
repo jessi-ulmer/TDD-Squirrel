@@ -6,7 +6,7 @@ namespace SnakesAndLaddersLib
     {
         public static Game CreateGame(int size)
         {
-            var board = new bool[size, size];
+            return new Game(false, true, size, size);    
             for (var i = 0; i < size; i++)
             {
                 for (var j = 0; j < size; j++)
