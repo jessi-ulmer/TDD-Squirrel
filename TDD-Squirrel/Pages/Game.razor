@@ -5,16 +5,8 @@
 <h4>Spielvorbereitung</h4>
 <div class="game-preparation">
     <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfRowsInput" min="0" max="10" @bind-value="@_rowsCountPreparation" disabled="@_isPlayingFieldSquare" />
-        <label>Anz. Spielreihen</label>
-    </span>
-    <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfFieldsInput" min="0" max="10" @bind-value="@_columnsCountPreparation" />
-        <label>Anz. Spielfelder pro Reihe</label>
-    </span>
-    <span class="input-content">
-        <input type="checkbox" name="isPlayingFieldSquare" checked="@_isPlayingFieldSquare" @onchange="OnIsPlayingFieldSquareValueChanged" />
-        <label>Spielfeld quadratisch</label>
+        <input type="number" class="input-numbers" name="numberOfFieldsInput" min="0" max="10" @bind-value="@_preparationPayingFileSize" />
+        <label>Anz. Spielfelder (Quadratisch)</label>
     </span>
     <br/>
     <button @onclick="StartNewGame" class="btn btn-primary button-peparation">Spielstart - Let's play</button>
