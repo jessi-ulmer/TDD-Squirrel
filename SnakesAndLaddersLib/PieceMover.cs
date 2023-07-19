@@ -20,7 +20,7 @@ public class PieceMover
 
     private static bool IsFinalSquareReached(Position position, int rows)
     {
-        var finalSquare = (rows % 2 == 0) ? new Position(0, 0) : new Position(0, rows - 1);
+        var finalSquare = (rows % 2 == 0) ? new Position(0, 0) : new Position (rows-1, 0);
         var isFinalSquareReached = (finalSquare == position);
         return isFinalSquareReached;
     }
@@ -39,14 +39,14 @@ public class PieceMover
                 Direction.Left => MoveLeft(newPosition),
                 _ => throw new InvalidOperationException()
             };
-            if (newPosition == new Position(-1, 0))
+            if (newPosition == new Position(0, -1))
             {
                 return new Position(0, 0);
             }
 
-            if (newPosition == new Position(-1, rows - 1))
+            if (newPosition == new Position(rows - 1, -1))
             {
-                return new Position(0, rows - 1);
+                return new Position(rows -1, 0);
             }
             movement--;
         }
@@ -57,10 +57,10 @@ public class PieceMover
 
     private static Direction DecideDirection(Position position, int rows)
     {
-        var isRightMovingRow = (rows - position.X) % 2 == 1;
+        var isRightMovingRow = (rows - position.Y) % 2 == 1;
 
-        var isMovingUp = (isRightMovingRow && (position.Y == rows - 1)) ||
-                         (!isRightMovingRow && (position.Y == 0));
+        var isMovingUp = (isRightMovingRow && (position.X == rows - 1)) ||
+                         (!isRightMovingRow && (position.X == 0));
         Direction direction;
         if (isMovingUp)
         {
@@ -78,17 +78,17 @@ public class PieceMover
 
     private static Position MoveLeft(Position previousPosition)
     {
-        return new Position(previousPosition.X, previousPosition.Y - 1);
+        return new Position(previousPosition.X - 1, previousPosition.Y);
     }
 
     private static Position MoveUp(Position previousPosition)
     {
-        return new Position(previousPosition.X - 1, previousPosition.Y);
+        return new Position(previousPosition.X, previousPosition.Y -1);
     }
 
     private static Position MoveRight(Position previousPosition)
     {
-        return new Position(previousPosition.X, previousPosition.Y + 1);
+        return new Position(previousPosition.X +1, previousPosition.Y);
     }
 
 
