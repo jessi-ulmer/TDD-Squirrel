@@ -49,6 +49,8 @@
     width: 40px;
     mask: url(images/cube.png);
     mask-size: cover;
+    -webkit-mask-image: url(images/cube.png);
+    -webkit-mask-size: cover;
 }
 
 .icon-disabled {
