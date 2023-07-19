@@ -9,19 +9,18 @@ public class PieceMover
         _diceRoller = diceRoller;
     }
 
-    public  MovingResult Move(Position previousPosition, int rows, int columns)
+    public MovingResult Move(Position previousPosition, int rows, int columns)
     {
         var movement = _diceRoller.RollDie();
-        
+
         var newPosition = CalculatePosition(previousPosition, movement, rows);
         var gameFinished = IsFinalSquareReached(newPosition, rows);
-        var newPositionPoint = (newPosition, 0);
-        return new MovingResult(newPositionPoint, gameFinished);
+        return new MovingResult(newPosition, gameFinished);
     }
 
     private static bool IsFinalSquareReached(Position position, int rows)
     {
-        var finalSquare = (rows % 2 == 0) ? new Position(0, 0) : new Position (0, rows - 1);
+        var finalSquare = (rows % 2 == 0) ? new Position(0, 0) : new Position(0, rows - 1);
         var isFinalSquareReached = (finalSquare == position);
         return isFinalSquareReached;
     }
@@ -42,7 +41,7 @@ public class PieceMover
             };
             if (newPosition == new Position(-1, 0))
             {
-                return new Position(0,0);
+                return new Position(0, 0);
             }
 
             if (newPosition == new Position(-1, rows - 1))
@@ -52,8 +51,8 @@ public class PieceMover
             movement--;
         }
         return newPosition;
-        
-        
+
+
     }
 
     private static Direction DecideDirection(Position position, int rows)

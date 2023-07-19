@@ -5,44 +5,51 @@ namespace TDD_Squirrel.Pages
 {
     public partial class Game
     {
-        private PieceMover pieceMover;
+        private readonly PieceMover _pieceMover;
 
-        private int NumberOfFields = 4;
-        private int NumberOfRows = 1;
+        //Muss noch in eine extra Komponente ausgelagert werden
+        private int _columnsCountPreparation = 1;
+        private int _rowsCountPreparation = 1;
+
+        private int _columnsCount = 4;
+        private int _rowsCount = 1;
         private bool _isPlayingFieldSquare;
 
-        private int PiecePosition = 1;
-        private bool DisabledDie;
-        private bool ShowGame;
+        private Position _piecePosition = default!;
+        private bool _disabledDie;
+        private bool _showGame;
 
         public Game()
         {
             var diceRoller = new DiceRoller();
-            pieceMover = new PieceMover(diceRoller);
+            _pieceMover = new PieceMover(diceRoller);
         }
 
         private void MovePiece()
         {
-            var result = pieceMover.Move(PiecePosition, NumberOfFields);
-            DisabledDie = result.IsFinalSquareReached;
-            PiecePosition = result.Position;
+            var result = _pieceMover.Move(_piecePosition, _rowsCountPreparation, _columnsCountPreparation);
+            _disabledDie = result.IsFinalSquareReached;
+            _piecePosition = result.Position;
         }
         private void StartNewGame()
         {
-            var game = GameCreator.CreateGame(NumberOfFields);
-            DisabledDie = game.IsDieDisabled;
-            ShowGame = game.Status;
-            //PiecePosition = game.Position;
-            NumberOfFields = game.Rows;
+            var game = GameCreator.CreateGame(_columnsCount);
+            _disabledDie = game.IsDieDisabled;
+            _showGame = game.Status;
+            _columnsCount = game.Columns;
+            _rowsCount = game.Rows;
+
+            // Vorerst selbst, soll aber noch von CreateGame kommen
+            _piecePosition = new Position(0, game.Columns - 1);
 
             StateHasChanged();
         }
 
         private void OnIsPlayingFieldSquareValueChanged(ChangeEventArgs e)
         {
-            _isPlayingFieldSquare = !_isPlayingFieldSquare;
+            _isPlayingFieldSquare = (bool)(e.Value ?? false);
 
-            NumberOfRows = _isPlayingFieldSquare
+            _rowsCount = _isPlayingFieldSquare
                 ? 0
                 : 1;
         }

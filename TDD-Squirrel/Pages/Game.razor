@@ -1,14 +1,15 @@
 ﻿@page "/game"
 @using TDD_Squirrel.Components
+@using SnakesAndLaddersLib
 
 <h4>Spielvorbereitung</h4>
 <div class="game-preparation">
     <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfRowsInput" min="0" max="10" @bind-value="@NumberOfRows" disabled="@_isPlayingFieldSquare" />
+        <input type="number" class="input-numbers" name="numberOfRowsInput" min="0" max="10" @bind-value="@_rowsCountPreparation" disabled="@_isPlayingFieldSquare" />
         <label>Anz. Spielreihen</label>
     </span>
     <span class="input-content">
-        <input type="number" class="input-numbers" name="numberOfFieldsInput" min="0" max="10" @bind-value="@NumberOfFields" />
+        <input type="number" class="input-numbers" name="numberOfFieldsInput" min="0" max="10" @bind-value="@_columnsCountPreparation" />
         <label>Anz. Spielfelder pro Reihe</label>
     </span>
     <span class="input-content">
@@ -19,14 +20,14 @@
     <button @onclick="StartNewGame" class="btn btn-primary button-peparation">Spielstart - Let's play</button>
 </div>
 
-@if (ShowGame)
+@if (_showGame)
 {
     <div>
         <h4>Spielbrett</h4>
-        <button @onclick="MovePiece" class="button-diece" disabled="@DisabledDie">
-            <span class="icon-cube @(DisabledDie ? "icon-disabled":"")"></span>
+        <button @onclick="MovePiece" class="button-diece" disabled="@_disabledDie">
+            <span class="icon-cube @(_disabledDie ? "icon-disabled" : "")"></span>
         </button>
-        @if (DisabledDie)
+        @if (_disabledDie)
         {
             <div class="game-end-notification">
                 Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
@@ -34,14 +35,14 @@
         }
 
         <div>
-            @for (var rowIndex = 0; rowIndex < NumberOfRows; rowIndex++)
+            @for (var rowIndex = 0; rowIndex < _rowsCount; rowIndex++)
             {
                 <div class="row-content">
-                    @for (var fieldIndex = 0; fieldIndex < NumberOfFields; fieldIndex++)
+                    @for (var fieldIndex = 0; fieldIndex < _columnsCount; fieldIndex++)
                     {
-                        var localFieldIndex = fieldIndex;
+                        var fieldPosition = new Position(fieldIndex, rowIndex);
                         <Field>
-                            @if (localFieldIndex == PiecePosition)
+                            @if (fieldPosition == _piecePosition)
                             {
                                 <div class="field-content">
                                     <GameFigure></GameFigure>
