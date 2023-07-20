@@ -6,13 +6,19 @@
     padding: 12px;
 }
 
+.game-information {
+    margin-bottom: 10px;
+}
+
 .game-end-notification {
     background-color: lightgreen;
     border: 1px solid green;
     border-radius: 12px;
     color: green;
+    display: inline-block;
     padding: 12px;
-    margin: 10px 0;
+    margin: 0 10px;
+    vertical-align: text-bottom;
 }
 
 .input-content {
@@ -30,6 +36,12 @@
 
 .field-content {
     display: table;
+}
+
+.field-text {
+    color: black;
+    font-weight: bold;
+    text-align: center;
 }
 
 .button-peparation {

@@ -16,15 +16,17 @@
 {
     <div>
         <h4>Spielbrett</h4>
-        <button @onclick="MovePiece" class="button-diece" disabled="@_disabledDie">
-            <span class="icon-cube @(_disabledDie ? "icon-disabled" : "")"></span>
-        </button>
-        @if (_disabledDie)
-        {
-            <div class="game-end-notification">
-                Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
-            </div>
-        }
+        <div class="game-information">
+            <button @onclick="MovePiece" class="button-diece" disabled="@_disabledDie">
+                <span class="icon-cube @(_disabledDie ? "icon-disabled" : "")"></span>
+            </button>
+            @if (_disabledDie)
+            {
+                <div class="game-end-notification">
+                    Spieler:in 1 hat gewonnen - Herzlichen Glückwunsch!
+                </div>
+            }
+        </div>
 
         <div>
             @for (var rowIndex = 0; rowIndex < _rowsCount; rowIndex++)
@@ -34,6 +36,16 @@
                     {
                         var fieldPosition = new Position(fieldIndex, rowIndex);
                         <Field>
+                            @if (fieldPosition == _startFieldPosition)
+                            {
+                                <div class="field-text">START</div>
+                            }
+
+                            @if (fieldPosition == _endFieldPosition)
+                            {
+                                <div class="field-text">ZIEL</div>
+                            }
+
                             @if (fieldPosition == _piecePosition)
                             {
                                 <div class="field-content">

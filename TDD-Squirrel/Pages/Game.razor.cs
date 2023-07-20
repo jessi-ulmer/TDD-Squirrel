@@ -10,6 +10,8 @@ namespace TDD_Squirrel.Pages
 
         private int _columnsCount = 4;
         private int _rowsCount = 1;
+        private Position _startFieldPosition = default!;
+        private Position _endFieldPosition = default!;
 
         private Position _piecePosition = default!;
         private bool _disabledDie;
@@ -37,7 +39,9 @@ namespace TDD_Squirrel.Pages
             _rowsCount = game.Rows;
 
             // Vorerst selbst, soll aber noch von CreateGame kommen
-            _piecePosition = new Position(0, game.Rows - 1);
+            _piecePosition = new Position(0, _rowsCount - 1);
+            _startFieldPosition = new Position(0, _rowsCount - 1);
+            _endFieldPosition = (_rowsCount % 2 == 0) ? new Position(0, 0) : new Position(_rowsCount - 1, 0);
 
             StateHasChanged();
         }
