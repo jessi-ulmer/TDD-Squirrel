@@ -48,11 +48,5 @@ public class PieceMoverTests
         yield return new TestCaseData(new Position(0, 1), 4, 2, 2, new Position(0,0 ), true).SetName("Stop at End, Size 2");
         yield return new TestCaseData(new Position(3, 0), 4, 4, 4, new Position(0,0 ), true).SetName("Stop at End, Size 4");
         yield return new TestCaseData(new Position(0, 1), 4, 3, 3, new Position(2,0 ), true).SetName("Stop at End, Size 3");
-            A.CallTo(() => _diceRoller.RollDie()).Returns(1);
-
-            var result = _sut.Move(position, board);
-
-            var expectedPosition = (0, 0);
-            result.Position.Should().Be(expectedPosition);
     }
 }

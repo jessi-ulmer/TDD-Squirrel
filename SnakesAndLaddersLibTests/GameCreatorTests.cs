@@ -20,20 +20,5 @@ public class GameCreatorTests
 
         game.Rows.Should().Be(expectedRows);
         game.Columns.Should().Be(expectedColumns);
-            game.Board.GetLength(1).Should().Be(size);
         }
-
-        [Test]
-        public void CreateGame_Should_Return_SquareBoard()
-        {
-            var game = GameCreator.CreateGame(4);
-
-            var expectedBoard = new bool[4, 4]
-            {
-                { false, false, false, false }, { false, false, false, false }, { false, false, false, false },
-                { false, false, false, false }
-            };
-            game.Board.Should().BeEquivalentTo(expectedBoard);
-
-    }
 }
