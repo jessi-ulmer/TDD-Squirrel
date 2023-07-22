@@ -15,7 +15,7 @@ public class PieceMover
 
         var newPosition = CalculatePosition(previousPosition, movement, rows);
         var gameFinished = IsFinalSquareReached(newPosition, rows);
-        return new MovingResult(newPosition, 0, gameFinished);
+        return new MovingResult(newPosition, movement, gameFinished);
     }
 
     private static bool IsFinalSquareReached(Position position, int rows)
