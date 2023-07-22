@@ -9,13 +9,28 @@ public class PieceMover
         _diceRoller = diceRoller;
     }
 
-    public MovingResult Move(Position previousPosition, int rows, int columns)
+    public MovingResult Move(Position previousPosition, int rows, IReadOnlyList<Ladder> ladders)
     {
         var movement = _diceRoller.RollDie();
 
         var newPosition = CalculatePosition(previousPosition, movement, rows);
+        newPosition = HandleLadders(newPosition, ladders);
         var gameFinished = IsFinalSquareReached(newPosition, rows);
         return new MovingResult(newPosition, movement, gameFinished);
+    }
+
+    private Position HandleLadders(Position position, IReadOnlyList<Ladder> ladders)
+    {
+        foreach (var ladder in ladders)
+        {
+            if (position.X == ladder.Start.X && position.Y == ladder.Start.Y)
+            {
+                var row = ladder.End.X;
+                var column = ladder.End.Y;
+                return new Position(column, row);
+            }
+        }
+        return position;
     }
 
     private static bool IsFinalSquareReached(Position position, int rows)
