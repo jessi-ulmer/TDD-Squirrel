@@ -25,12 +25,22 @@ public class PieceMover
         {
             if (position.X == ladder.Start.X && position.Y == ladder.Start.Y)
             {
-                var row = ladder.End.X;
-                var column = ladder.End.Y;
+                var row = GetCurrentRow(ladder);
+                var column = GetCurrentColumn(ladder);
                 return new Position(column, row);
             }
         }
         return position;
+    }
+
+    private static int GetCurrentColumn(Ladder ladder)
+    {
+        return ladder.End.Y;
+    }
+
+    private static int GetCurrentRow(Ladder ladder)
+    {
+        return ladder.End.X; ;
     }
 
     private static bool IsFinalSquareReached(Position position, int rows)
