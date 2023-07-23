@@ -12,5 +12,11 @@ namespace TDD_Squirrel.Test
         {
             Assert.Pass();
         }
+
+        //[Test]
+        //public void Test2()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }
