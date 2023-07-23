@@ -12,7 +12,7 @@ namespace SnakesAndLaddersLibTests
         public void SetUpTest()
         {
             var result = true;
-            result.Should().BeFalse();  
+            result.Should().BeTrue();  
         }
 
         [Test]
