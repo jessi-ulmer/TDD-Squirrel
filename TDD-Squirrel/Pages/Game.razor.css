@@ -30,6 +30,30 @@
     width: 50px;
 }
 
+.game-svg {
+    position: absolute;
+}
+
+.game-action-field {
+    stroke-width: 2.5;
+}
+
+.ladder {
+    stroke: darkmagenta;
+}
+
+.ladder-arrow {
+    fill: darkmagenta;
+}
+
+.snake {
+    stroke: forestgreen;
+}
+
+.snake-arrow {
+    fill: forestgreen;
+}
+
 .row-content {
     display: flex;
 }

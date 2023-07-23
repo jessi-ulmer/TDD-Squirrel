@@ -1,6 +1,7 @@
 ﻿@page "/game"
 @using TDD_Squirrel.Components
 @using SnakesAndLaddersLib
+@using TDD_Squirrel.Models
 
 <h4>Spielvorbereitung</h4>
 <div class="game-preparation">
@@ -29,6 +30,26 @@
         </div>
 
         <div>
+            @if (_actionFields.Any())
+            {
+                <svg class="game-svg" style="width: @_svgSize; height: @_svgSize">
+                    <marker id="ladder-arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L9,3 z" class="ladder-arrow"></path>
+                    </marker>
+
+                    <marker id="snake-arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L9,3 z" class="snake-arrow"></path>
+                    </marker>
+                    
+                    @foreach (var actionField in _actionFields)
+                    {
+                        <line class="game-action-field @(actionField.ActionType == GameActionType.Ladder ? "ladder" : "snake")"
+                            x1="@actionField.Start.X" y1="@actionField.Start.Y" 
+                            x2="@actionField.End.X" y2="@actionField.End.Y"
+                            marker-end="@(actionField.ActionType == GameActionType.Ladder ? "url(#ladder-arrow)" : "url(#snake-arrow)")" />
+                    }
+                </svg>
+            }
             @for (var rowIndex = 0; rowIndex < _rowsCount; rowIndex++)
             {
                 <div class="row-content">
