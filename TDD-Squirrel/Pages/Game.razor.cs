@@ -8,6 +8,7 @@ namespace TDD_Squirrel.Pages
         private readonly PieceMover _pieceMover;
 
         private int _preparationPayingFileSize = 1;
+        private int _preparationLadderSnakeCount = 0;
 
         private int _columnsCount = 4;
         private int _rowsCount = 1;

@@ -10,17 +10,6 @@
     margin-bottom: 10px;
 }
 
-.game-end-notification {
-    background-color: lightgreen;
-    border: 1px solid green;
-    border-radius: 12px;
-    color: green;
-    display: inline-block;
-    padding: 12px;
-    margin: 0 10px;
-    vertical-align: text-bottom;
-}
-
 .input-content {
     margin-right: 14px;
 }
@@ -28,6 +17,10 @@
 .input-numbers {
     margin-right: 10px;
     width: 50px;
+}
+
+.input-label {
+    margin-right: 16px;
 }
 
 .game-svg {
