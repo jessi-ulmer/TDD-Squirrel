@@ -25,6 +25,7 @@
             <button @onclick="MovePiece" class="button-diece" disabled="@_disabledDie">
                 <span class="icon-cube @(_disabledDie ? "icon-disabled" : "")"></span>
             </button>
+            <span class="dice-number">@_lastDiceNumber</span>
             @if (_disabledDie)
             {
                 <WinnerPopUp WinnerId="1"></WinnerPopUp>
@@ -35,13 +36,13 @@
             @if (_actionFields.Any())
             {
                 <svg class="game-svg" style="width: @_svgSize; height: @_svgSize">
-                    <marker id="ladder-arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+                    @*<marker id="ladder-arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
                         <path d="M0,0 L0,6 L9,3 z" class="ladder-arrow"></path>
                     </marker>
 
                     <marker id="snake-arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
                         <path d="M0,0 L0,6 L9,3 z" class="snake-arrow"></path>
-                    </marker>
+                    </marker>*@
                     
                     @foreach (var actionField in _actionFields)
                     {

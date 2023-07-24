@@ -12,10 +12,12 @@ namespace TDD_Squirrel.Pages
 
         private int _columnsCount = 4;
         private int _rowsCount = 1;
+        private List<Ladder> _ladders = default!;
         private Position _startFieldPosition = default!;
         private Position _endFieldPosition = default!;
 
         private Position _piecePosition = default!;
+        private int _lastDiceNumber = 0;
         private bool _disabledDie;
         private bool _showGame;
 
@@ -31,9 +33,10 @@ namespace TDD_Squirrel.Pages
 
         private void MovePiece()
         {
-            var result = _pieceMover.Move(_piecePosition, _rowsCount, _columnsCount);
+            var result = _pieceMover.Move(_piecePosition, _rowsCount, _ladders);
             _disabledDie = result.IsFinalSquareReached;
             _piecePosition = result.Position;
+            _lastDiceNumber = result.Movement;
         }
 
         private void StartNewGame()
@@ -43,38 +46,38 @@ namespace TDD_Squirrel.Pages
             _showGame = game.Status;
             _columnsCount = game.Columns;
             _rowsCount = game.Rows;
+            _ladders = game.Ladders.ToList();
 
             // Vorerst selbst, soll aber noch von CreateGame kommen
             _piecePosition = new Position(0, _rowsCount - 1);
             _startFieldPosition = new Position(0, _rowsCount - 1);
             _endFieldPosition = (_rowsCount % 2 == 0) ? new Position(0, 0) : new Position(_rowsCount - 1, 0);
 
-            CreateActionFields();
+            CreateActionFields(_ladders);
 
             StateHasChanged();
         }
 
-        private void CreateActionFields()
+        private void CreateActionFields(IEnumerable<Ladder> ladders)
         {
             _actionFields = new List<GameActionField>();
 
-            // Testwerte für Leiter & Schlange / Kommt noch nicht von CreateGame
-            // Start Dummy
-            var ladderStart = new Position(2, _rowsCount - 1);
-            var ladderEnd = new Position(2, 0);
-
-            var snakeStart = new Position(1, 0);
-            var snakeEnd = new Position(0, _rowsCount - 2);
+            // Testwerte für Schlangen / Kommt noch nicht von CreateGame
+            //// Start Dummy
+            //var snakeStart = new Position(1, 0);
+            //var snakeEnd = new Position(0, _rowsCount - 2);
             // End Dummy
 
             var size = FieldSize * _columnsCount;
             _svgSize = $"{size}px";
 
-            var ladder = CalculateActionFieldPositions(ladderStart, ladderEnd, GameActionType.Ladder);
-            _actionFields.Add(ladder);
+            var calculatedLadders = ladders.Select(ladder =>
+                CalculateActionFieldPositions(ladder.Start, ladder.End, GameActionType.Ladder));
+            //var ladder = CalculateActionFieldPositions(ladderStart, ladderEnd, GameActionType.Ladder);
+            _actionFields.AddRange(calculatedLadders);
 
-            var snake = CalculateActionFieldPositions(snakeStart, snakeEnd, GameActionType.Snake);
-            _actionFields.Add(snake);
+            //var snake = CalculateActionFieldPositions(snakeStart, snakeEnd, GameActionType.Snake);
+            //_actionFields.Add(snake);
         }
 
         private static GameActionField CalculateActionFieldPositions(Position start, Position end, GameActionType type)
