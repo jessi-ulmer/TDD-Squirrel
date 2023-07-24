@@ -20,7 +20,7 @@ namespace TDD_Squirrel.Pages
 
         private const int FieldSize = 100;
         private string _svgSize = string.Empty;
-        private List<GameActionField> _actionFields = new List<GameActionField>();
+        private List<GameActionField> _actionFields = new();
 
         public Game()
         {
