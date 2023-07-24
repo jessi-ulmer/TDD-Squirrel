@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDD-Squirrel.Test", "TDD-Sq
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakesAndLaddersLib", "SnakesAndLaddersLib\SnakesAndLaddersLib.csproj", "{F39A21E6-197B-43D1-BC8F-5238E8BF1ECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakesAndLaddersLibTests", "SnakesAndLaddersLibTests\SnakesAndLaddersLibTests.csproj", "{8B093CA2-32BD-468F-BA02-435B2E53A06F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakesAndLaddersLibTests", "SnakesAndLaddersLibTests\SnakesAndLaddersLibTests.csproj", "{8B093CA2-32BD-468F-BA02-435B2E53A06F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
