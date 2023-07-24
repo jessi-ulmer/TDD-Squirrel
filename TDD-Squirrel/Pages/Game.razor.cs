@@ -48,12 +48,12 @@ namespace TDD_Squirrel.Pages
             _startFieldPosition = new Position(0, _rowsCount - 1);
             _endFieldPosition = (_rowsCount % 2 == 0) ? new Position(0, 0) : new Position(_rowsCount - 1, 0);
 
-            CreateLadderAndSnakes();
+            CreateActionFields();
 
             StateHasChanged();
         }
 
-        private void CreateLadderAndSnakes()
+        private void CreateActionFields()
         {
             _actionFields = new List<GameActionField>();
 
