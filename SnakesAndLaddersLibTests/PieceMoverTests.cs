@@ -24,9 +24,9 @@ public class PieceMoverTests
     public void PieceMoverMove_Should_Return_Position(Position previousPosition, int movement, int rows, int columns, Position expectedPosition, bool expectedFinalSquare)
     {
         A.CallTo(() => _diceRoller.RollDie()).Returns(movement);
-        var result = _sut.Move(previousPosition, rows, columns);
+        var result = _sut.Move(previousPosition, rows, Array.Empty<Ladder>());
 
-        var expectation = new MovingResult(expectedPosition, expectedFinalSquare);
+        var expectation = new MovingResult(expectedPosition, movement, expectedFinalSquare);
         result.Should().Be(expectation);
     }
 

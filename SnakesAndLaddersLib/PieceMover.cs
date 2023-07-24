@@ -9,13 +9,38 @@ public class PieceMover
         _diceRoller = diceRoller;
     }
 
-    public MovingResult Move(Position previousPosition, int rows, int columns)
+    public MovingResult Move(Position previousPosition, int rows, IReadOnlyList<Ladder> ladders)
     {
         var movement = _diceRoller.RollDie();
 
         var newPosition = CalculatePosition(previousPosition, movement, rows);
+        newPosition = HandleLadders(newPosition, ladders);
         var gameFinished = IsFinalSquareReached(newPosition, rows);
-        return new MovingResult(newPosition, gameFinished);
+        return new MovingResult(newPosition, movement, gameFinished);
+    }
+
+    private Position HandleLadders(Position position, IReadOnlyList<Ladder> ladders)
+    {
+        foreach (var ladder in ladders)
+        {
+            if (position.X == ladder.Start.X && position.Y == ladder.Start.Y)
+            {
+                var row = GetCurrentRow(ladder);
+                var column = GetCurrentColumn(ladder);
+                return new Position(column, row);
+            }
+        }
+        return position;
+    }
+
+    private static int GetCurrentColumn(Ladder ladder)
+    {
+        return ladder.End.Y;
+    }
+
+    private static int GetCurrentRow(Ladder ladder)
+    {
+        return ladder.End.X; ;
     }
 
     private static bool IsFinalSquareReached(Position position, int rows)
