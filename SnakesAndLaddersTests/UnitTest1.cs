@@ -15,13 +15,25 @@ namespace SnakesAndLaddersTests
         [TestCase(0,3,3)]
         public void Move_Should_Return_Something(int position, int movement, int expected)
         {
-            var reset = Move(position, movement);
-            reset.Should().Be(expected);
+            var result = Move(position, movement);
+            result.Should().Be(expected);
+        }
+
+        [Test]
+        public void Throw_Die_Returns_1_to_6()
+        {
+            var result = Throw_Die();
+            result.Should().BeInRange(1, 6);
         }
 
         public int Move(int position, int movement)
         {
             return position + movement;
+        }
+
+        private int Throw_Die()
+        {
+            return 0;
         }
     }
 }
