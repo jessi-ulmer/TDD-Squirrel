@@ -20,10 +20,19 @@ namespace SnakesAndLaddersTests
         }
 
         [Test]
-        public void Throw_Die_Returns_1_to_6()
+        public void Throw_Die_Return_Int_Range_1_to_6()
         {
             var result = Throw_Die();
+            result.Should().BeOfType(typeof(int));
             result.Should().BeInRange(1, 6);
+            var results = new List<int>();
+            for (int i = 0; i < 100; i++) 
+            {
+                result = Throw_Die();
+                results.Add(result);
+            }
+            results.Should().Contain(1);
+            results.Should().Contain(6);
         }
 
         public int Move(int position, int movement)
@@ -33,7 +42,9 @@ namespace SnakesAndLaddersTests
 
         private int Throw_Die()
         {
-            return 0;
+            var random = new Random();
+            var result = random.Next(1, 7);
+            return result;
         }
     }
 }
