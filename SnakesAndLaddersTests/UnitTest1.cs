@@ -46,5 +46,20 @@ namespace SnakesAndLaddersTests
             var result = random.Next(1, 7);
             return result;
         }
+
+        public int Throw_Die_Move(int position)
+        {
+            var die = Throw_Die();
+            var new_position = Move(position, die);
+            return new_position;
+        }
+
+        [Test]
+        public void Test_Throw_Die_Move()
+        {
+            var result = Throw_Die_Move(1);
+            result.Should().BeOfType(typeof(int));
+            result.Should().BeInRange(1, 6);
+        }
     }
 }
