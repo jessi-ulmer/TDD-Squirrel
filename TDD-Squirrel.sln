@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDD-Squirrel", "TDD-Squirre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDD-Squirrel.Test", "TDD-Squirrel.Test\TDD-Squirrel.Test.csproj", "{112186B6-9D45-425C-A003-EBBC292DEF11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakesAndLaddersTests", "SnakesAndLaddersTests\SnakesAndLaddersTests.csproj", "{039F9E09-AB42-469F-994F-589CFA9D1E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakesAndLaddersTests", "SnakesAndLaddersTests\SnakesAndLaddersTests.csproj", "{039F9E09-AB42-469F-994F-589CFA9D1E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakesAndLadders", "SnakesAndLadders\SnakesAndLadders.csproj", "{D7D4CCE4-46CE-4AB7-9AAA-0AB7EC3D98F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnakesAndLadders", "SnakesAndLadders\SnakesAndLadders.csproj", "{D7D4CCE4-46CE-4AB7-9AAA-0AB7EC3D98F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
