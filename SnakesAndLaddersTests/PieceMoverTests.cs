@@ -36,8 +36,16 @@ namespace SnakesAndLaddersTests
         public void RollDieAndMove_Should_Return_4()
         {
             A.CallTo(() => _diceRoller.RollDie()).Returns(4);
-            var result = _sut.RollDieMove(0);
+            var result = _sut.RollDieMove(0, 2);
             result.Should().Be(4);
+        }
+
+        public void Reach_End()
+        {
+            var max_fields = 10;
+            A.CallTo(() => _diceRoller.RollDie()).Returns(4);
+            var result = _sut.RollDieMove(9, 2);
+            result.Should().Be(max_fields);
         }
     }
 }
